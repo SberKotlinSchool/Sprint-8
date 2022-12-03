@@ -7,10 +7,10 @@ data class Item(
     /**
      * Произвольный идентификатор
      */
-    val id: Long,
+    var id: Long,
 
     /**
      * Произвольное название
      */
-    val name: String
+    var name: String
 )
