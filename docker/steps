@@ -1,0 +1,13 @@
+docker image build -t myappdocker .
+docker container run -p 8080:8080 myappdocker
+
+docker login
+docker image tag myappdocker gigi0907/myappdocker
+docker image push gigi0907/myappdocker
+
+docker container run -p 8080:8080 gigi0907/myappdocker
+
+
+kubectl apply -f deployment-definition.yml
+kubectl port-forward pod/myappdocker-deployment-6f9556c545-hmm6s 8080:8080
+kubectl delete -f deployment-definition.yml
