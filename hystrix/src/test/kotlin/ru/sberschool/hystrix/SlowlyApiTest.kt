@@ -51,6 +51,7 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        val actual = client.getSomething().data
+        assertEquals("predefined data", actual)
     }
 }
