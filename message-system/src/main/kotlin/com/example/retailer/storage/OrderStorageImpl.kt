@@ -56,6 +56,7 @@ class OrderStorageImpl : OrderStorage {
     }
 
     override fun getOrderInfo(id: String): OrderInfo? {
-        TODO("Not yet implemented")
+        val dataOrderInfo = dataOrderInfoRepository.getDataOrderInfoByOrderId(id.toLong())
+        return orderInfoMapper.toDto(dataOrderInfo)
     }
 }

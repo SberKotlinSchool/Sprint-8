@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DataOrderInfoRepository: JpaRepository<DataOrderInfo, Long>
+interface DataOrderInfoRepository: JpaRepository<DataOrderInfo, Long> {
+    fun getDataOrderInfoByOrderId(orderId:Long) : DataOrderInfo
+}

@@ -19,7 +19,7 @@ class DataOrderInfo(
 
     @Column
     @Enumerated(EnumType.STRING)
-    var status: OrderStatus = OrderStatus.CREATED,
+    var status: OrderStatus = OrderStatus.SENT,
 
     @Column
     var signature: String,

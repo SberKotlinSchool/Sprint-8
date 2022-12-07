@@ -17,7 +17,7 @@ data class OrderInfo(
      *  Created
      *
      */
-    var status: OrderStatus = OrderStatus.CREATED,
+    var status: OrderStatus = OrderStatus.SENT,
 
     /**
      * Контрольная сумма

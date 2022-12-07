@@ -44,7 +44,7 @@ class RetailerApplicationTests {
                 listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
             )
 
-        val placeOrder = placeOrder(draftOrder)
+        val placeOrder:OrderInfo = placeOrder(draftOrder)
 
         //Исходное состояние заказа SENT
         assertThat(placeOrder.status, equalTo(OrderStatus.SENT))
