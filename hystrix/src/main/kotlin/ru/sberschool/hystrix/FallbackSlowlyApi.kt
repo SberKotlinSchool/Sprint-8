@@ -1,7 +1,7 @@
 package ru.sberschool.hystrix
 
 class FallbackSlowlyApi : SlowlyApi {
-    override fun getSomething() = SimpleResponse("predefined data")
+    override fun getDitto(): Ditto  = Ditto(-1, -1, "predefined data")
 }
 
 

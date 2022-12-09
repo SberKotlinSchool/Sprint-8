@@ -15,12 +15,21 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+   private val client = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+
+   private val realClient = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2", FallbackSlowlyApi())
+
+
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -35,22 +44,31 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getDitto() should return real data`() {
+        assertEquals("ditto", realClient.getDitto().name)
+        assertEquals(214, realClient.getDitto().order)
+        assertEquals(132, realClient.getDitto().id)
+    }
+
+    @Test
+    fun `getDitto() should return predefined data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/pokemon/ditto")
             )
             .respond(
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 5) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("predefined data", client.getDitto().name)
+        assertEquals(-1, client.getDitto().order)
+        assertEquals(-1, client.getDitto().id)
     }
 }
