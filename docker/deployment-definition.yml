@@ -1,1 +1,22 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myappdocker-deployment
+  labels:
+    app: myappdocker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myappdocker
+  template:
+    metadata:
+      labels:
+        app: myappdocker
+    spec:
+      containers:
+        - image: gigi0907/myappdocker:latest
+          name: myappdocker
+          ports:
+            - name: web
+              containerPort: 8000

@@ -1,10 +1,12 @@
 package ru.sberschool.hystrix
 
 import feign.RequestLine
+import ru.sberschool.hystrix.model.PokemonSpecie
 
 interface SlowlyApi {
-    @RequestLine("GET /")
-    fun getSomething(): SimpleResponse
+
+    @RequestLine("GET /pokemon-species/")
+    fun getPokemonSpecie(): PokemonSpecie
 }
 
 
