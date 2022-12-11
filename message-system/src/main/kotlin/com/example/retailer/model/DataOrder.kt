@@ -1,26 +1,33 @@
-package com.example.retailer.api.distributor
+package com.example.retailer.model
+
+import javax.persistence.*
 
 /**
  * Описание заказа
  */
-data class Order(
+@Entity
+class DataOrder(
     /**
      * Уникальный идентификатор заказа на стороне ретейлера
      */
-    var id: String? = null,
-
+    @Id
+    @GeneratedValue
+    var id: Long? = null,
     /**
      * Произвольный адрес доставки
      */
-    var address: String = "",
+    @Column
+    var address: String? = null,
 
     /**
      * Произвольный получатель доставки
      */
-    var recipient: String = "",
+    @Column
+    var recipient: String? = null,
 
     /**
      * Список заказанных товаров
      */
-    var items: List<Item> = mutableListOf()
+    @OneToMany(cascade = [CascadeType.MERGE], fetch = FetchType.EAGER)
+    var items: List<DataItem> = mutableListOf()
 )

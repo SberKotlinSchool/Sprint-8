@@ -10,18 +10,18 @@ data class OrderInfo(
      *
      * @see com.example.retailer.api.distributor.Item#id
      */
-    val orderId: String,
+    var orderId: String = "",
 
     /**
      * Статус заказа:
      *  Created
      *
      */
-    var status: OrderStatus,
+    var status: OrderStatus = OrderStatus.SENT,
 
     /**
      * Контрольная сумма
      */
-    val signature: String,
+    var signature: String = "",
 
 )
