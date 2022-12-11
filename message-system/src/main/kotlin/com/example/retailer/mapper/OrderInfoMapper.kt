@@ -8,7 +8,12 @@ import org.mapstruct.Mappings
 
 @Mapper(componentModel = "spring", uses = [OrderMapper::class])
 interface OrderInfoMapper {
+
+    @Mappings(
+        Mapping(source = "orderId", target = "order.id")
+    )
     fun toEntity(dto: OrderInfo): DataOrderInfo
+
     @Mappings(
         Mapping(source = "order.id", target = "orderId")
     )

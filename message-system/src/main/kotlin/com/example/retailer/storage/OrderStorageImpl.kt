@@ -51,8 +51,15 @@ class OrderStorageImpl : OrderStorage {
 
     private fun getSignature(dataOrder: DataOrder) = dataOrder.hashCode().toString()
 
-    override fun updateOrder(order: OrderInfo): Boolean {
-        TODO("Not yet implemented")
+    override fun updateOrder(orderInfo: OrderInfo): Boolean {
+
+
+        val entity = dataOrderInfoRepository.getDataOrderInfoByOrderId(orderInfo.orderId.toLong())
+        entity.status = orderInfo.status
+
+        dataOrderInfoRepository.saveAndFlush(entity)
+
+        return true
     }
 
     override fun getOrderInfo(id: String): OrderInfo? {
