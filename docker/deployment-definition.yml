@@ -1,1 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-deployment
+  labels:
+    app: docker-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: docker-app
+  template:
+    metadata:
+      labels:
+        app: docker-app
+    spec:
+      containers:
+        - name: 'interesting-hawking'
+          image: openjdk:17
+          ports:
+            - containerPort: 63342
+
+
+#  NAME                                 READY   STATUS    RESTARTS   AGE
+#  docker-deployment-7c9bd499d5-9wkpw   1/1     Running   0          30s
+#  docker-deployment-7c9bd499d5-f28br   1/1     Running   0          30s
+#  docker-deployment-7c9bd499d5-nhpg9   1/1     Running   0          30s
 
