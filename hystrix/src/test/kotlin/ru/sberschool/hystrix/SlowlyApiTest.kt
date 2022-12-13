@@ -15,12 +15,20 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+
+    private val fallBackClient = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+        .target(SlowlyApi::class.java, "http://127.0.0.1:8080", FallbackSlowlyApi())
+
+    private val client = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2", FallbackSlowlyApi())
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -35,14 +43,22 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getDitto() should return real data`() {
+        assertEquals("ditto", client.getDitto().name)
+        assertEquals(214, client.getDitto().order)
+        assertEquals(132, client.getDitto().id)
+        assertEquals(40, client.getDitto().weight)
+    }
+
+    @Test
+    fun `getDitto() with timeout`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/pokemon/ditto")
             )
             .respond(
                 // наш запрос попадает на таймаут
@@ -51,6 +67,9 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("pokemon", fallBackClient.getDitto().name)
+        assertEquals(-1, fallBackClient.getDitto().order)
+        assertEquals(-1, fallBackClient.getDitto().id)
+        assertEquals(-1, fallBackClient.getDitto().weight)
     }
 }
