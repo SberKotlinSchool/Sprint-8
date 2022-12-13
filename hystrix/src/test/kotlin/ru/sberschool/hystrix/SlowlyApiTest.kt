@@ -58,7 +58,7 @@ class SlowlyApiTest {
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 1) //
             )
 
         val fallbackClient =  HystrixFeign.builder()
