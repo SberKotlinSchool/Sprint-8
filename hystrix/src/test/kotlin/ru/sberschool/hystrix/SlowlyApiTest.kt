@@ -11,21 +11,21 @@ import org.mockserver.client.server.MockServerClient
 import org.mockserver.integration.ClientAndServer
 import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
+import ru.sberschool.hystrix.dto.Pokemon
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+    private val client = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
-        // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
-    lateinit var mockServer: ClientAndServer
+
+    private lateinit var mockServer: ClientAndServer
 
     @BeforeEach
     fun setup() {
-        // запускаем мок сервер для тестирования клиента
         mockServer = ClientAndServer.startClientAndServer(18080)
     }
 
@@ -35,22 +35,37 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
-        // given
+    fun `getPokemon() returns real data`() {
         MockServerClient("127.0.0.1", 18080)
             .`when`(
-                // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/pokemon/35")
             )
             .respond(
-                // наш запрос попадает на таймаут
+                HttpResponse.response()
+                    .withStatusCode(200)
+                    .withDelay(TimeUnit.SECONDS, 0)
+                    .withBody("{\"id\": 35, \"name\": \"Pokemon\'s Name\", \"height\": 6, \"weight\": 75}")
+            )
+
+        assertEquals(Pokemon(35, "Pokemon's Name", height = 6, weight = 75), client.getPokemon())
+    }
+
+    @Test
+    fun `getPokemon() returns predefined data`() {
+        MockServerClient("127.0.0.1", 18080)
+            .`when`(
+                HttpRequest.request()
+                    .withMethod("GET")
+                    .withPath("/pokemon/35")
+            )
+            .respond(
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 5) //
             )
-        // expect
-        assertEquals("predefined data", client.getSomething().data)
+
+        assertEquals(Pokemon(-1, "Too long to wait"), client.getPokemon())
     }
 }
