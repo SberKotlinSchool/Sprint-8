@@ -14,7 +14,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class RetailerApplicationTests {
 
     @LocalServerPort
@@ -41,7 +41,7 @@ class RetailerApplicationTests {
                 null,
                 "sample address",
                 "sample recipient",
-                listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
+                mutableListOf(Item(1L, "Sample item"), Item(2L, "Another item"))
             )
 
         val placeOrder = placeOrder(draftOrder)

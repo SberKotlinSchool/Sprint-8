@@ -14,13 +14,21 @@ import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+class PokemonApiTest {
+    private val client = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+        .target(PokemonApi::class.java, "http://127.0.0.1:18080", FallbackPokemonApi())
+
+    private val pokemonApi = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(PokemonApi::class.java, "https://pokeapi.co/api/v2", FallbackPokemonApi())
+
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -35,6 +43,20 @@ class SlowlyApiTest {
     }
 
     @Test
+    fun `getSomething() should return data from api`() {
+
+
+        val response = pokemonApi.getPickachuInfo()
+        assertEquals(25, response?.id)
+        assertEquals(112, response?.baseExperience)
+        assertEquals(4, response?.height)
+        assertEquals("pikachu", response?.name)
+        assertEquals(60, response?.weight)
+
+
+    }
+
+    @Test
     fun `getSomething() should return predefined data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
@@ -42,7 +64,7 @@ class SlowlyApiTest {
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/pokemon/pikachu")
             )
             .respond(
                 // наш запрос попадает на таймаут
@@ -51,6 +73,7 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        val response = client.getPickachuInfo()
+        assertEquals(-1, response.id)
     }
 }
