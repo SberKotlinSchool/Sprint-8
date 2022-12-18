@@ -86,6 +86,4 @@ class RetailerApplicationTests {
         assertThat(resp.statusCode, equalTo(HttpStatus.OK))
         return resp.body!!
     }
-
-
 }
