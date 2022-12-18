@@ -1,1 +1,213 @@
-Разместите в этом файле лог успешного теста
+2022-12-18 23:42:05.086 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP POST http://localhost:52259/placeOrder
+2022-12-18 23:42:05.334 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:05.359 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Writing [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+2022-12-18 23:42:05.454  INFO 16244 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-18 23:42:05.454  INFO 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-18 23:42:05.454 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-12-18 23:42:05.454 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-12-18 23:42:05.454 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-12-18 23:42:05.455 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@ad585fb
+2022-12-18 23:42:05.455 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@6b03c35c
+2022-12-18 23:42:05.455 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-12-18 23:42:05.455  INFO 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-18 23:42:05.467 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/placeOrder", parameters={}
+2022-12-18 23:42:05.473 DEBUG 16244 --- [o-auto-1-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#placeOrder(Order)
+2022-12-18 23:42:05.502 DEBUG 16244 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample ite (truncated)...]
+Hibernate: 
+    insert 
+    into
+        order_
+        (address, recipient, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        item
+        (name_, id) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        item
+        (name_, id) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        order__items
+        (order_id, items_id) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        order__items
+        (order_id, items_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+Hibernate: 
+    insert 
+    into
+        order_info
+        (signature, status, order_id) 
+    values
+        (?, ?, ?)
+2022-12-18 23:42:05.681 DEBUG 16244 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:05.682 DEBUG 16244 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=SENT, signature=)]
+2022-12-18 23:42:05.688 DEBUG 16244 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:05.688 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:05.691 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2022-12-18 23:42:05.699 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:52259/view/402880ea85265412018526541fe20000
+2022-12-18 23:42:05.699 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:05.701 DEBUG 16244 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/view/402880ea85265412018526541fe20000", parameters={}
+2022-12-18 23:42:05.702 DEBUG 16244 --- [o-auto-1-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+2022-12-18 23:42:05.725 DEBUG 16244 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:05.725 DEBUG 16244 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=SENT, signature=)]
+2022-12-18 23:42:05.726 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:05.726 DEBUG 16244 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:05.727 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2022-12-18 23:42:06.030 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:52259/view/402880ea85265412018526541fe20000
+2022-12-18 23:42:06.030 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:06.031 DEBUG 16244 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/view/402880ea85265412018526541fe20000", parameters={}
+2022-12-18 23:42:06.031 DEBUG 16244 --- [o-auto-1-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+2022-12-18 23:42:06.034 DEBUG 16244 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:06.034 DEBUG 16244 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=SENT, signature=)]
+2022-12-18 23:42:06.034 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:06.034 DEBUG 16244 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:06.034 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+Hibernate: 
+    select
+        order0_.id as id1_1_0_,
+        order0_.address as address2_1_0_,
+        order0_.recipient as recipien3_1_0_ 
+    from
+        order_ order0_ 
+    where
+        order0_.id=?
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+Hibernate: 
+    update
+        order_info 
+    set
+        signature=?,
+        status=? 
+    where
+        order_id=?
+2022-12-18 23:42:06.338 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:52259/view/402880ea85265412018526541fe20000
+2022-12-18 23:42:06.338 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:06.340 DEBUG 16244 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/view/402880ea85265412018526541fe20000", parameters={}
+2022-12-18 23:42:06.341 DEBUG 16244 --- [o-auto-1-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+2022-12-18 23:42:06.343 DEBUG 16244 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:06.343 DEBUG 16244 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=CREATED, signature=d8a5d5fb205ae71510738c (truncated)...]
+2022-12-18 23:42:06.344 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:06.344 DEBUG 16244 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:06.344 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2022-12-18 23:42:06.345 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:52259/view/402880ea85265412018526541fe20000
+2022-12-18 23:42:06.345 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:06.346 DEBUG 16244 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/view/402880ea85265412018526541fe20000", parameters={}
+2022-12-18 23:42:06.346 DEBUG 16244 --- [o-auto-1-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+2022-12-18 23:42:06.349 DEBUG 16244 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:06.349 DEBUG 16244 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=CREATED, signature=d8a5d5fb205ae71510738c (truncated)...]
+2022-12-18 23:42:06.349 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:06.350 DEBUG 16244 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:06.350 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+Hibernate: 
+    select
+        order0_.id as id1_1_0_,
+        order0_.address as address2_1_0_,
+        order0_.recipient as recipien3_1_0_ 
+    from
+        order_ order0_ 
+    where
+        order0_.id=?
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+Hibernate: 
+    update
+        order_info 
+    set
+        signature=?,
+        status=? 
+    where
+        order_id=?
+2022-12-18 23:42:06.651 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:52259/view/402880ea85265412018526541fe20000
+2022-12-18 23:42:06.651 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2022-12-18 23:42:06.652 DEBUG 16244 --- [o-auto-1-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/view/402880ea85265412018526541fe20000", parameters={}
+2022-12-18 23:42:06.652 DEBUG 16244 --- [o-auto-1-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: 
+    select
+        orderinfo0_.order_id as order_id1_3_0_,
+        orderinfo0_.signature as signatur2_3_0_,
+        orderinfo0_.status as status3_3_0_ 
+    from
+        order_info orderinfo0_ 
+    where
+        orderinfo0_.order_id=?
+2022-12-18 23:42:06.661 DEBUG 16244 --- [o-auto-1-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-12-18 23:42:06.661 DEBUG 16244 --- [o-auto-1-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880ea85265412018526541fe20000, status=DELIVERED, signature=d8a5d5fb205ae7151073 (truncated)...]
+2022-12-18 23:42:06.662 DEBUG 16244 --- [o-auto-1-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-12-18 23:42:06.662 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2022-12-18 23:42:06.662 DEBUG 16244 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
