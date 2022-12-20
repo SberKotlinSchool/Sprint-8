@@ -1,6 +1,11 @@
 package com.example.retailer.adapter
 
 import com.example.retailer.api.distributor.Order
+import com.example.retailer.mapper.RetailMapper
+import org.springframework.amqp.core.Message
+import org.springframework.amqp.rabbit.core.RabbitTemplate
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * Интерфейс для отправки заказа дистрибьютору
@@ -18,4 +23,23 @@ interface DistributorPublisher {
      */
     fun placeOrder(order: Order) : Boolean
 
+}
+
+@Service
+class DistributorPublisherImpl(
+    @Autowired
+    val template: RabbitTemplate
+) : DistributorPublisher {
+
+    override fun placeOrder(order: Order): Boolean {
+        val massage = RetailMapper().mapToJsonString(order)
+        template.convertAndSend("distributor_exchange", "distributor.placeOrder.aimshenik.${order.id}", massage, headers())
+        return true
+    }
+
+    private fun headers() = { msg : Message  ->
+        msg.messageProperties.headers["Notify-Exchange"] = "distributor_exchange"
+        msg.messageProperties.headers["Notify-RoutingKey"] = "retail.aimshenik"
+        msg
+    }
 }
