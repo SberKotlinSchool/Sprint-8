@@ -1,7 +1,8 @@
 package ru.sberschool.hystrix
 
-class FallbackSlowlyApi : SlowlyApi {
-    override fun getSomething() = SimpleResponse("predefined data")
+import feign.Param
+
+class FallbackSlowlyApi : SlowlyApi{
+    override fun findById(@Param("id") id: Long?) = Pokemon(1L, false, false, false, "ServerFallback")
+
 }
-
-
