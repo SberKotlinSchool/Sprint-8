@@ -15,7 +15,7 @@ import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-class SlowlyApiTest {
+class вSlowlyApiTest {
     val fallbackPokemon = Pokemon(1L, false, false, false, "ServerFallback")
     val bulbasaurPokemon = Pokemon(1L, false, true, false, "bulbasaur")
 
