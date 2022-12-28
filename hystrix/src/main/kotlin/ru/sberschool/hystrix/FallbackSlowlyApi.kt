@@ -1,7 +1,7 @@
 package ru.sberschool.hystrix
 
+import pokemon.Pokemon
+
 class FallbackSlowlyApi : SlowlyApi {
-    override fun getSomething() = SimpleResponse("predefined data")
+    override fun getPokemon() = Pokemon(-1, "Too long to wait")
 }
-
-
