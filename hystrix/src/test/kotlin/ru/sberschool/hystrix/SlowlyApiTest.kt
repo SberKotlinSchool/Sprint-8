@@ -1,56 +1,60 @@
 package ru.sberschool.hystrix
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import feign.Request
 import feign.httpclient.ApacheHttpClient
 import feign.hystrix.HystrixFeign
 import feign.jackson.JacksonDecoder
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockserver.client.server.MockServerClient
-import org.mockserver.integration.ClientAndServer
-import org.mockserver.model.HttpRequest
-import org.mockserver.model.HttpResponse
+import ru.sberschool.hystrix.api.FallbackSlowlyApi
+import ru.sberschool.hystrix.api.SlowlyApi
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+
+    private val fallbackClient = HystrixFeign.builder()
         .client(ApacheHttpClient())
-        .decoder(JacksonDecoder())
+        .decoder(JacksonDecoder(ObjectMapper().registerKotlinModule()))
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
-    lateinit var mockServer: ClientAndServer
 
-    @BeforeEach
-    fun setup() {
-        // запускаем мок сервер для тестирования клиента
-        mockServer = ClientAndServer.startClientAndServer(18080)
-    }
+    private val pokeApiClient = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder(ObjectMapper().registerKotlinModule()))
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(3, TimeUnit.SECONDS, 3, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2/", FallbackSlowlyApi())
 
-    @AfterEach
-    fun shutdown() {
-        mockServer.stop()
+    @Test
+    fun `getSomething() should return available API methods`() {
+        // given
+        val responseMap = pokeApiClient.getAllMethods()
+
+        // expect
+        assertTrue(responseMap.keys.contains("pokemon"))
+        assertTrue(responseMap.keys.contains("item"))
+        assertEquals("https://pokeapi.co/api/v2/pokemon/", responseMap["pokemon"])
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getItems() should return real data`() {
         // given
-        MockServerClient("127.0.0.1", 18080)
-            .`when`(
-                // задаем матчер для нашего запроса
-                HttpRequest.request()
-                    .withMethod("GET")
-                    .withPath("/")
-            )
-            .respond(
-                // наш запрос попадает на таймаут
-                HttpResponse.response()
-                    .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
-            )
+        val response = pokeApiClient.getItems()
+
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertTrue(response.results.isNotEmpty())
+    }
+
+    @Test
+    fun `getItems() should return predefined data`() {
+        // given
+        val response = fallbackClient.getItems()
+
+        // expect
+        assertEquals(-1L, response.count)
     }
 }
