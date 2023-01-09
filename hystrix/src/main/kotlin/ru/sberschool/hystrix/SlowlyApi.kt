@@ -3,8 +3,8 @@ package ru.sberschool.hystrix
 import feign.RequestLine
 
 interface SlowlyApi {
-    @RequestLine("GET /")
-    fun getSomething(): SimpleResponse
+    @RequestLine("GET /berry/cheri")
+    fun getBerry(): Berry
 }
 
 

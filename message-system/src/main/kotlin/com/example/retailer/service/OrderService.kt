@@ -1,6 +1,7 @@
 package com.example.retailer.service
 
 import com.example.retailer.adapter.DistributorPublisher
+import com.example.retailer.adapter.DistributorPublisherImpl
 import com.example.retailer.api.distributor.Order
 import com.example.retailer.api.distributor.OrderInfo
 import com.example.retailer.storage.OrderStorage
