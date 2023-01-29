@@ -1,6 +1,7 @@
 package ru.sberschool.hystrix
 
 import feign.Request
+import feign.gson.GsonDecoder
 import feign.httpclient.ApacheHttpClient
 import feign.hystrix.HystrixFeign
 import feign.jackson.JacksonDecoder
@@ -14,13 +15,23 @@ import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+class вSlowlyApiTest {
+    val fallbackPokemon = Pokemon(1L, false, false, false, "ServerFallback")
+    val bulbasaurPokemon = Pokemon(1L, false, true, false, "bulbasaur")
+
+    val clientFallback = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+
+    val clientReal = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(GsonDecoder())
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2/pokemon/")
+
+
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -35,7 +46,7 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `findById() should return circuit breaker data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
@@ -51,6 +62,11 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals(fallbackPokemon, clientFallback.findById(1L))
+    }
+
+    @Test
+    fun `findById() should return bulbasaur data`() {
+        assertEquals(bulbasaurPokemon, clientReal.findById(1L))
     }
 }

@@ -3,6 +3,7 @@ package com.example.retailer.service
 import com.example.retailer.adapter.DistributorPublisher
 import com.example.retailer.api.distributor.Order
 import com.example.retailer.api.distributor.OrderInfo
+import com.example.retailer.storage.ItemRepository
 import com.example.retailer.storage.OrderStorage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -33,6 +34,13 @@ class OrderService {
         }
         return data.info
     }
+
+//    fun placeStringOrder(orderDraft: Map<String,String>) {
+////        val stringData = RetailMapper().mapToJsonString(orderDraft)
+//        if (!distributorPublisher.placeStringOrder(orderDraft)) {
+//            throw IllegalStateException("Publishing failed")
+//        }
+//    }
 
     /**
      * Поиск заказа в БД
