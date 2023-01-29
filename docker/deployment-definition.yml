@@ -1,1 +1,46 @@
+#Minicube command
+#minikube start --driver=docker
 
+#Docker command
+#docker image build -t app .
+#docker login -u emmdems
+#docker tag app:latest emmdems/dockerhub:app
+#docker push emmdems/dockerhub:app
+
+#Kubectl command
+#kubectl create -f deployment-definition.yml
+#kubectl get pods
+#kubectl port-forward pod/app-847d654c95-mfmpg 8080:8080
+#kubectl delete -f deployment-definition.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: app
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: app
+  template:
+    metadata:
+      labels:
+        run: app
+    spec:
+      containers:
+        - image: emmdems/dockerhub:app
+          name: app
+          ports:
+            - containerPort: 8888
+          env:
+            - name: ENVOY_XDS_HOST
+              value: "rotor.default.svc.cluster.local" # Change if using a different namespace
+            - name: ENVOY_XDS_PORT
+              value: "50000"
+            - name: ENVOY_NODE_ZONE
+              value: dev-local
+            - name: ENVOY_NODE_CLUSTER
+              value: dev-proxy
+      restartPolicy: Always
