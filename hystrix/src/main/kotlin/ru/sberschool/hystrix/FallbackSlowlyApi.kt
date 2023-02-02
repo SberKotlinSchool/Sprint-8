@@ -1,7 +1,7 @@
 package ru.sberschool.hystrix
 
 class FallbackSlowlyApi : SlowlyApi {
-    override fun getSomething() = SimpleResponse("predefined data")
+    override fun getCharmander(): CharmanderApi = CharmanderApi(id=-1, name = "predefined data")
 }
 
 

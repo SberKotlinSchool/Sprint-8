@@ -15,13 +15,22 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+    private val client: SlowlyApi = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
-    lateinit var mockServer: ClientAndServer
+
+    private val good_client: SlowlyApi = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2", FallbackSlowlyApi())
+
+
+    private lateinit var mockServer: ClientAndServer
 
     @BeforeEach
     fun setup() {
@@ -35,7 +44,7 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getCharmander() should return predefined data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
@@ -48,9 +57,16 @@ class SlowlyApiTest {
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 10) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("predefined data", client.getCharmander().name)
+        assertEquals(-1, client.getCharmander().id)
+    }
+
+    @Test
+    fun `getCharmander() should return good data`() {
+        assertEquals("charmander", good_client.getCharmander().name)
+        assertEquals(4, good_client.getCharmander().id)
     }
 }
