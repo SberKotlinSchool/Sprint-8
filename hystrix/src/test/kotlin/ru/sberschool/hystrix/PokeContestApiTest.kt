@@ -13,15 +13,29 @@ import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+
+private const val TIMEOUT = 10L
+
+private const val MOCK_SERVER_IP = "http://127.0.0.1"
+private const val MOCK_SERVER_PORT = 18080
+
+private const val REAL_SERVER_HOST = "https://pokeapi.co/api/v2"
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+    lateinit var mockServer: ClientAndServer
+
+    private val brokenClient = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
-        // для удобства тестирования задаем таймауты на 1 секунду
-        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
-    lateinit var mockServer: ClientAndServer
+        .options(Request.Options(TIMEOUT, TimeUnit.SECONDS, TIMEOUT, TimeUnit.SECONDS, true))
+        .target(PokeContestApi::class.java, "$MOCK_SERVER_IP:$MOCK_SERVER_PORT", FallbackSlowlyApi())
+
+    private val workingClient = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        .options(Request.Options(TIMEOUT, TimeUnit.SECONDS, TIMEOUT, TimeUnit.SECONDS, true))
+        .target(PokeContestApi::class.java, REAL_SERVER_HOST, FallbackSlowlyApi())
 
     @BeforeEach
     fun setup() {
@@ -35,22 +49,28 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getCoolContestType() should return predefined data`() {
         // given
-        MockServerClient("127.0.0.1", 18080)
+        MockServerClient(MOCK_SERVER_IP, MOCK_SERVER_PORT)
             .`when`(
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/contest-type/cool")
             )
             .respond(
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 15)
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals(DEFAULT, brokenClient.getCoolContestType())
+    }
+
+    @Test
+    fun `getCoolContestType() should return proper data`() {
+        val contestType = workingClient.getCoolContestType()
+        assertNotEquals(DEFAULT, contestType)
     }
 }
