@@ -1,1 +1,65 @@
-Разместите в этом файле лог успешного теста
+2023-02-04 01:14:53.465 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP POST http://localhost:57675/placeOrder
+2023-02-04 01:14:53.818 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:53.849 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Writing [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+2023-02-04 01:14:53.972  INFO 7884 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-04 01:14:53.972  INFO 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-04 01:14:53.972 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-02-04 01:14:53.972 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-02-04 01:14:53.972 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-02-04 01:14:53.975 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4e951fb1
+2023-02-04 01:14:53.975 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@690ed13a
+2023-02-04 01:14:53.976 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-02-04 01:14:53.976  INFO 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-02-04 01:14:53.991 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/placeOrder", parameters={}
+2023-02-04 01:14:53.999 DEBUG 7884 --- [o-auto-1-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#placeOrder(Order)
+2023-02-04 01:14:54.060 DEBUG 7884 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample ite (truncated)...]
+2023-02-04 01:14:54.253 DEBUG 7884 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:54.254 DEBUG 7884 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=SENT, signature=)]
+2023-02-04 01:14:54.269 DEBUG 7884 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:54.269 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:54.270 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-02-04 01:14:54.286 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:57675/view/fe391a43-6956-409e-93a1-64ea21c5ea12
+2023-02-04 01:14:54.287 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:54.290 DEBUG 7884 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/view/fe391a43-6956-409e-93a1-64ea21c5ea12", parameters={}
+2023-02-04 01:14:54.291 DEBUG 7884 --- [o-auto-1-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-02-04 01:14:54.322 DEBUG 7884 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:54.322 DEBUG 7884 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=SENT, signature=)]
+2023-02-04 01:14:54.323 DEBUG 7884 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:54.323 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:54.323 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-02-04 01:14:54.628 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:57675/view/fe391a43-6956-409e-93a1-64ea21c5ea12
+2023-02-04 01:14:54.629 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:54.631 DEBUG 7884 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/view/fe391a43-6956-409e-93a1-64ea21c5ea12", parameters={}
+2023-02-04 01:14:54.632 DEBUG 7884 --- [o-auto-1-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-02-04 01:14:54.633 DEBUG 7884 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:54.634 DEBUG 7884 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=SENT, signature=)]
+2023-02-04 01:14:54.634 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:54.635 DEBUG 7884 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:54.635 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-02-04 01:14:54.939 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:57675/view/fe391a43-6956-409e-93a1-64ea21c5ea12
+2023-02-04 01:14:54.940 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:54.944 DEBUG 7884 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/view/fe391a43-6956-409e-93a1-64ea21c5ea12", parameters={}
+2023-02-04 01:14:54.945 DEBUG 7884 --- [o-auto-1-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-02-04 01:14:54.947 DEBUG 7884 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:54.947 DEBUG 7884 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=CREATED, signature=ecfe05e2aab8bf18bd (truncated)...]
+2023-02-04 01:14:54.948 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:54.948 DEBUG 7884 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:54.948 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-02-04 01:14:54.949 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:57675/view/fe391a43-6956-409e-93a1-64ea21c5ea12
+2023-02-04 01:14:54.950 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:54.953 DEBUG 7884 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/view/fe391a43-6956-409e-93a1-64ea21c5ea12", parameters={}
+2023-02-04 01:14:54.954 DEBUG 7884 --- [o-auto-1-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-02-04 01:14:54.957 DEBUG 7884 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:54.957 DEBUG 7884 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=CREATED, signature=ecfe05e2aab8bf18bd (truncated)...]
+2023-02-04 01:14:54.958 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:54.958 DEBUG 7884 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:54.959 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-02-04 01:14:55.265 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:57675/view/fe391a43-6956-409e-93a1-64ea21c5ea12
+2023-02-04 01:14:55.265 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-02-04 01:14:55.268 DEBUG 7884 --- [o-auto-1-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/view/fe391a43-6956-409e-93a1-64ea21c5ea12", parameters={}
+2023-02-04 01:14:55.269 DEBUG 7884 --- [o-auto-1-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-02-04 01:14:55.273 DEBUG 7884 --- [o-auto-1-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-02-04 01:14:55.273 DEBUG 7884 --- [o-auto-1-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=fe391a43-6956-409e-93a1-64ea21c5ea12, status=DELIVERED, signature=ecfe05e2aab8bf18 (truncated)...]
+2023-02-04 01:14:55.274 DEBUG 7884 --- [o-auto-1-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-02-04 01:14:55.274 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-02-04 01:14:55.274 DEBUG 7884 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
