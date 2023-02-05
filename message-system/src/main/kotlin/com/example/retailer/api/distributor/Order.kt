@@ -1,5 +1,6 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
 /**
@@ -12,7 +13,8 @@ data class Order(
      * Уникальный идентификатор заказа на стороне ретейлера
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     val id: String?,
 
     /**
@@ -28,6 +30,6 @@ data class Order(
     /**
      * Список заказанных товаров
      */
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.ALL])
     val items: List<Item>
 )

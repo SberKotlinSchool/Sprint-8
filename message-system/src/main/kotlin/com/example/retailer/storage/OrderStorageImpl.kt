@@ -19,19 +19,18 @@ class OrderStorageImpl: OrderStorage {
     private lateinit var orderInfoRepository: OrderInfoRepository;
 
     override fun createOrder(draftOrder: Order): PlaceOrderData {
-        val savedOrder  = orderRepository.save(draftOrder);
-        val orderInfo =  OrderInfo(savedOrder.id!!, OrderStatus.CREATED, "")
-        val savedInfo = orderInfoRepository.save(orderInfo)
-        return PlaceOrderData(savedOrder, savedInfo!!);
+        orderRepository.save(draftOrder);
+        val orderInfo =  OrderInfo(draftOrder.id!!, OrderStatus.SENT, "")
+        orderInfoRepository.save(orderInfo)
+        return PlaceOrderData(draftOrder, orderInfo);
     }
 
     override fun updateOrder(order: OrderInfo): Boolean {
-        try{
+        return try{
             orderInfoRepository.save(order);
-            return true;
-        } catch (e: Exception)
-        {
-            return false;
+            true;
+        } catch (e: Exception) {
+            false;
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
+import org.hibernate.annotations.Type
 import javax.persistence.*
 
 /**
@@ -14,7 +16,6 @@ data class OrderInfo(
      * @see com.example.retailer.api.distributor.Item#id
      */
     @Id
-    @GeneratedValue
     val orderId: String,
 
     /**
