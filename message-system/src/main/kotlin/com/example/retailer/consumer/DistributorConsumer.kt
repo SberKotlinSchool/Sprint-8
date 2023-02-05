@@ -4,5 +4,5 @@ import com.example.retailer.api.distributor.OrderInfo
 
 interface DistributorConsumer {
 
-    fun updateStatus(message: String) : Boolean
+    fun updateStatus(message: String)
 }

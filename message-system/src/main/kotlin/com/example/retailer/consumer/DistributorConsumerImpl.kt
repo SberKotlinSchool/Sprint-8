@@ -13,14 +13,9 @@ class DistributorConsumerImpl(@Autowired private val orderStorage: OrderStorage,
 
 
     @RabbitListener(queues = ["\${rabbitmq.retailer.queue.name}"])
-    override fun updateStatus(message: String) : Boolean {
-        return try {
-            val orderInfo = objectMapper.readValue(message, OrderInfo::class.java)
-            orderStorage.updateOrder(orderInfo)
-            true
-        } catch (ex: Exception) {
-            false
-        }
+    override fun updateStatus(message: String) {
+        val orderInfo = objectMapper.readValue(message, OrderInfo::class.java)
+        orderStorage.updateOrder(orderInfo)
     }
 
 }
