@@ -6,18 +6,20 @@ import org.springframework.amqp.core.Queue
 import org.springframework.amqp.core.TopicExchange
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 
 @Configuration
+@ComponentScan("com.example.retailer")
 class RabbitMQConfig {
-    @Value("\${rabbitmq.queue.name}")
+    @Value("\${rabbitmq.retailer.queue.name}")
     private val queue: String? = null
 
     @Value("\${rabbitmq.exchange.name}")
     private val exchange: String? = null
 
-    @Value("\${rabbitmq.routing.key}")
+    @Value("\${rabbitmq.retailer.routing.key}")
     private val routingKey: String? = null
 
     // spring bean for rabbitmq queue

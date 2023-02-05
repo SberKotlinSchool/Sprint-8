@@ -1,5 +1,7 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
+import java.io.Serializable
 import javax.persistence.*
 
 /**
@@ -9,20 +11,12 @@ import javax.persistence.*
 data class OrderInfo(
 
     /**
-     * Произвольный идентификатор
-     */
-    @Id
-    @GeneratedValue
-    var id: String = "",
-
-    /**
      * Уникальный идентификатор заказа
      *
      * @see com.example.retailer.api.distributor.Item#id
      */
-    @JoinColumn(name = "order_id")
-    @OneToOne
-    val order: Order,
+    @Id
+    val orderId: String,
 
     /**
      * Статус заказа:

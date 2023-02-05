@@ -14,7 +14,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class RetailerApplicationTests {
 
     @LocalServerPort
@@ -49,10 +49,10 @@ class RetailerApplicationTests {
         assertThat(placeOrder.status, equalTo(OrderStatus.SENT))
 
         //После получения уведомления от дистрибьютора должен быть статус "СОЗДАН"
-        checkStatus(placeOrder.order.id, OrderStatus.CREATED, 20)
+        checkStatus(placeOrder.orderId, OrderStatus.CREATED, 20)
 
         //После следующего уведомления от дистрибьютора должен быть статус "ДОСТАВЛЕН"
-        checkStatus(placeOrder.order.id, OrderStatus.DELIVERED, 20)
+        checkStatus(placeOrder.orderId, OrderStatus.DELIVERED, 20)
 
 
     }
@@ -85,6 +85,8 @@ class RetailerApplicationTests {
         assertThat(resp.statusCode, equalTo(HttpStatus.OK))
         return resp.body!!
     }
+
+
 
 
 }

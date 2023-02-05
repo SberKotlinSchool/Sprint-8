@@ -12,7 +12,7 @@ class DistributorConsumerImpl(@Autowired private val orderStorage: OrderStorage,
                               @Autowired private val objectMapper: ObjectMapper) : DistributorConsumer {
 
 
-    @RabbitListener(queues = ["\${rabbitmq.queue.name}"])
+    @RabbitListener(queues = ["\${rabbitmq.retailer.queue.name}"])
     override fun updateStatus(message: String) : Boolean {
         return try {
             val orderInfo = objectMapper.readValue(message, OrderInfo::class.java)

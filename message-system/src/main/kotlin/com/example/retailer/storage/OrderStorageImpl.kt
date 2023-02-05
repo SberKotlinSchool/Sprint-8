@@ -14,13 +14,13 @@ class OrderStorageImpl(@Autowired val orderRepo: OrderRepository, @Autowired val
 
     override fun createOrder(draftOrder: Order): PlaceOrderData {
         val order = orderRepo.save(draftOrder)
-        val orderInfo = orderInfoRepo.save(OrderInfo(order = order, status = OrderStatus.CREATED, signature = ""))
+        val orderInfo = orderInfoRepo.save(OrderInfo(orderId = order.id, status = OrderStatus.SENT, signature = ""))
         return PlaceOrderData(order, orderInfo)
     }
 
-    override fun updateOrder(order: OrderInfo): Boolean {
+    override fun updateOrder(orderInfo: OrderInfo): Boolean {
         return try {
-            orderInfoRepo.save(order)
+            orderInfoRepo.save(orderInfo)
             true
         } catch (ex: Exception) {
             false
