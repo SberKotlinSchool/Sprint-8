@@ -1,1 +1,22 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-controller
+  labels:
+    app: rest-controller
+spec:
+  template:
+    metadata:
+      name: rest-controller
+      labels:
+        app: rest-controller
+    spec:
+      containers:
+        - name: my-container
+          image: tatianado/my-image:my-tag
+          ports:
+            - containerPort: 8080
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rest-controller

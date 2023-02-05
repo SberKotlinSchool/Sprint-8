@@ -38,10 +38,9 @@ class RetailerApplicationTests {
     fun `distributor integration test`() {
         val draftOrder =
             Order(
-                null,
-                "sample address",
-                "sample recipient",
-                listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
+                address = "sample address",
+                recipient = "sample recipient",
+                items = listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
             )
 
         val placeOrder = placeOrder(draftOrder)
@@ -50,10 +49,10 @@ class RetailerApplicationTests {
         assertThat(placeOrder.status, equalTo(OrderStatus.SENT))
 
         //После получения уведомления от дистрибьютора должен быть статус "СОЗДАН"
-        checkStatus(placeOrder.orderId, OrderStatus.CREATED, 20)
+        checkStatus(placeOrder.order.id, OrderStatus.CREATED, 20)
 
         //После следующего уведомления от дистрибьютора должен быть статус "ДОСТАВЛЕН"
-        checkStatus(placeOrder.orderId, OrderStatus.DELIVERED, 20)
+        checkStatus(placeOrder.order.id, OrderStatus.DELIVERED, 20)
 
 
     }

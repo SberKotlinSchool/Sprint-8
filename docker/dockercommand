@@ -1,2 +1,2 @@
-docker build image -t  my_image .
-docker run -p 80:8080 -e "SPRING_PROFILES_ACTIVE=prod" --name my_container
+docker build image -t  my-image .
+docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" --name my-container
