@@ -18,9 +18,9 @@ class DistributorPublisherImpl: DistributorPublisher {
     override fun placeOrder(order: Order): Boolean {
 
         try {
-            template.convertAndSend(exchange.name, "distributor.placeOrder.Michael.${order.id}", order) {
+            template.convertAndSend(exchange.name, "distributor.placeOrder.idromanova.${order.id}", order) {
                 it.messageProperties.headers["Notify-Exchange"] = exchange.name
-                it.messageProperties.headers["Notify-RoutingKey"] = "retailer.Michael"
+                it.messageProperties.headers["Notify-RoutingKey"] = "retailer.idromanova"
                 it
             }
         } catch (e: Exception) {
