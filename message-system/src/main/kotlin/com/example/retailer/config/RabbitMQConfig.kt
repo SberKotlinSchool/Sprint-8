@@ -59,4 +59,6 @@ class RabbitMQConfig {
     fun getRoutingkey() = routingkey
 
     fun getNotifyRoutingKey() = notifyRoutingKey
+
+    fun getExchange() = exchange
 }

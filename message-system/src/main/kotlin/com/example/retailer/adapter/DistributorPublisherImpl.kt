@@ -16,7 +16,7 @@ class DistributorPublisherImpl(
         return try {
             rabbitTemplate.convertAndSend(rabbitMQConfig.getRoutingkey() + "." + order.id, order)
             {
-                it.messageProperties.headers["Notify-Exchange"] = rabbitMQConfig.exchange()
+                it.messageProperties.headers["Notify-Exchange"] = rabbitMQConfig.getExchange()
                 it.messageProperties.headers["Notify-RoutingKey"] = rabbitMQConfig.getNotifyRoutingKey()
                 it
             }
