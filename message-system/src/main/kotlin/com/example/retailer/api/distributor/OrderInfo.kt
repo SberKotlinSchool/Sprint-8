@@ -1,7 +1,5 @@
 package com.example.retailer.api.distributor
 
-import org.hibernate.annotations.GenericGenerator
-import org.hibernate.annotations.Type
 import javax.persistence.*
 
 /**
@@ -23,7 +21,7 @@ data class OrderInfo(
      *  Created
      *
      */
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     var status: OrderStatus,
 
     /**
