@@ -50,10 +50,10 @@ class RetailerApplicationTests {
         assertThat(placeOrder.status, equalTo(OrderStatus.SENT))
 
         //После получения уведомления от дистрибьютора должен быть статус "СОЗДАН"
-        checkStatus(placeOrder.orderId, OrderStatus.CREATED, 2000)
+        checkStatus(placeOrder.orderId, OrderStatus.CREATED, 20)
 
         //После следующего уведомления от дистрибьютора должен быть статус "ДОСТАВЛЕН"
-        checkStatus(placeOrder.orderId, OrderStatus.DELIVERED, 2000)
+        checkStatus(placeOrder.orderId, OrderStatus.DELIVERED, 20)
 
 
     }
@@ -67,6 +67,8 @@ class RetailerApplicationTests {
             } catch (e: Throwable) {
                 if (retry <= 0) {
                     throw e
+                } else {
+                    Thread.sleep(300)
                 }
             }
         }
