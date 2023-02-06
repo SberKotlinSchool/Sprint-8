@@ -14,7 +14,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class RetailerApplicationTests {
 
     @LocalServerPort
@@ -38,10 +38,9 @@ class RetailerApplicationTests {
     fun `distributor integration test`() {
         val draftOrder =
             Order(
-                null,
-                "sample address",
-                "sample recipient",
-                listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
+                address = "sample address",
+                recipient = "sample recipient",
+                items = listOf(Item(1L, "Sample item"), Item(2L, "Another item"))
             )
 
         val placeOrder = placeOrder(draftOrder)
@@ -86,6 +85,8 @@ class RetailerApplicationTests {
         assertThat(resp.statusCode, equalTo(HttpStatus.OK))
         return resp.body!!
     }
+
+
 
 
 }
