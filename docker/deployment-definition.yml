@@ -1,1 +1,41 @@
-
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sprint-8-app
+  labels:
+    app: sprint-8-app
+    app.kubernetes.io/name: sprint-8-app
+    app.kubernetes.io/version: 0.0.1-SNAPSHOT
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: sprint-8-app
+      app.kubernetes.io/name: sprint-8-app
+      app.kubernetes.io/version: 0.0.1-SNAPSHOT
+  template:
+    metadata:
+      labels:
+        app: sprint-8-app
+        app.kubernetes.io/name: sprint-8-app
+        app.kubernetes.io/version: 0.0.1-SNAPSHOT
+    spec:
+      containers:
+        - name: main-app
+          image: url/to/my/docker/registry
+          imagePullPolicy: Always
+          env:
+            - name: PROFILE
+              value: prod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 120m
+              memory: 1024Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
