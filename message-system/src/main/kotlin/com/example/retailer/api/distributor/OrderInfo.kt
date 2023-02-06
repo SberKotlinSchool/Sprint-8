@@ -21,12 +21,13 @@ data class OrderInfo(
      *  Created
      *
      */
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     var status: OrderStatus,
 
     /**
      * Контрольная сумма
      */
+    @Column
     val signature: String,
 
 )
