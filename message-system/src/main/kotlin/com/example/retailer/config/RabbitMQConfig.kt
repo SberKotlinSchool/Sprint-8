@@ -33,13 +33,13 @@ class RabbitMQConfig {
     }
 
     @Bean
-    fun exchange(): DirectExchange {
-        return DirectExchange(exchange)
+    fun exchange(): TopicExchange {
+        return TopicExchange(exchange)
     }
 
     @Bean
-    fun binding(queue: Queue, exchange: DirectExchange): Binding {
-        return BindingBuilder.bind(queue).to(exchange).with(notifyRoutingKey)
+    fun binding(queue: Queue, exchange: TopicExchange): Binding {
+        return BindingBuilder.bind(queue).to(exchange).with(notifyRoutingKey + ".#")
     }
 
     @Bean

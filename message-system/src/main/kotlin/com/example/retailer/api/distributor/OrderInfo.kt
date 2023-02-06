@@ -24,7 +24,7 @@ data class OrderInfo(
      *  Created
      *
      */
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     var status: OrderStatus,
 
     /**
