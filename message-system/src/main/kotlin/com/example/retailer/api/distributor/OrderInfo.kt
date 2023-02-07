@@ -24,4 +24,6 @@ data class OrderInfo(
      */
     val signature: String,
 
-)
+) {
+    constructor() : this("", OrderStatus.SENT, "")
+}
