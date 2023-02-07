@@ -20,11 +20,13 @@ data class Order(
     /**
      * Произвольный адрес доставки
      */
+    @Column
     val address: String,
 
     /**
      * Произвольный получатель доставки
      */
+    @Column
     val recipient: String,
 
     /**

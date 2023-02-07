@@ -1,5 +1,6 @@
 package com.example.retailer.api.distributor
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -19,5 +20,6 @@ data class Item(
     /**
      * Произвольное название
      */
+    @Column
     val name: String
 )

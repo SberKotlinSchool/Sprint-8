@@ -26,11 +26,12 @@ class OrderStorageImpl: OrderStorage {
     }
 
     override fun updateOrder(order: OrderInfo): Boolean {
-        return try{
-            orderInfoRepository.save(order);
-            true;
-        } catch (e: Exception) {
-            false;
+        val orderInfo = getOrderInfo(order.orderId)
+        return if (orderInfo != null) {
+            orderInfoRepository.save(order)
+            true
+        } else {
+            false
         }
     }
 
