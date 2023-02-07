@@ -1,1 +1,64 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+    type: back-end
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      name: app-pod
+      labels:
+        app: app
+        type: back-end
+    spec:
+      containers:
+        - name: app-docker-test
+          image: otusarchitectpopov/kotlin:docker-test
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /hello
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /hello
+            initialDelaySeconds: 10
+            periodSeconds: 5
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+  namespace: default
+data:
+  ACTIVE_PROFILE: "prod"
+  spring.profiles.active: ${ACTIVE_PROFILE}
+---
+# curl http://$(minikube ip):30008/hello -> PRODUCTION!
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  type: NodePort
+  selector:
+    type: back-end
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 30008

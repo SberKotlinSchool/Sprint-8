@@ -79,7 +79,7 @@ class RetailerApplicationTests {
 
 
     private fun getOrderInfo(id: String): OrderInfo =
-        assertResp(restTemplate.getForEntity(url("/view/" + id), OrderInfo::class.java))
+        assertResp(restTemplate.getForEntity(url("/view/$id"), OrderInfo::class.java))
 
 
     private fun assertResp(resp: ResponseEntity<OrderInfo>): OrderInfo {
