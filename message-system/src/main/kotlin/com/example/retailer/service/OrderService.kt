@@ -6,7 +6,6 @@ import com.example.retailer.api.distributor.OrderInfo
 import com.example.retailer.storage.OrderStorage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.lang.IllegalStateException
 
 /**
  * Сервис с бизнес-логикой обработки заказов
