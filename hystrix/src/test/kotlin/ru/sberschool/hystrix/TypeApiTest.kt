@@ -14,13 +14,8 @@ import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-class SlowlyApiTest {
-    val client = HystrixFeign.builder()
-        .client(ApacheHttpClient())
-        .decoder(JacksonDecoder())
-        // для удобства тестирования задаем таймауты на 1 секунду
-        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+class TypeApiTest {
+
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -34,8 +29,30 @@ class SlowlyApiTest {
         mockServer.stop()
     }
 
+    val client = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        .options(Request.Options(30, TimeUnit.SECONDS, 30, TimeUnit.SECONDS, true))
+        .target(TypeApi::class.java, "https://pokeapi.co/api/v2/", FallbackTypeApi())
+
+    val mockClient = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        .options(Request.Options(30, TimeUnit.SECONDS, 30, TimeUnit.SECONDS, true))
+        .target(TypeApi::class.java, "http://127.0.0.1:18080", FallbackTypeApi())
+
+
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getType should return real object`() {
+        val type = client.getTypeById(1)
+        assertEquals(1, type.id)
+        assertEquals("normal", type.name)
+        assertEquals(154, type.pokemons.size)
+        assertEquals(200, type.moves.size)
+    }
+
+    @Test
+    fun `getType should return fallback data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
@@ -51,6 +68,6 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("EmptyType", mockClient.getTypeById(11).name)
     }
 }
