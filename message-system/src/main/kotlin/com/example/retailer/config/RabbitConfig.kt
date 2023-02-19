@@ -21,20 +21,12 @@ class RabbitConfig (
     @Value("\${consumer.routing.prefix}")
     private val consumerRoutingKeyPrefix: String
 ) {
-//    @Bean
-//    fun connectionFactory() : ConnectionFactory {
-//        val connectionFactory = CachingConnectionFactory()
-//        connectionFactory.username = "user"
-//        connectionFactory.setPassword("password")
-//        return connectionFactory
-//    }
 
     @Bean
     fun jsonMessageConverter(): MessageConverter = Jackson2JsonMessageConverter()
 
     @Bean
     fun rabbitTemplate(connectionFactory: ConnectionFactory): RabbitTemplate {
-//    fun rabbitTemplate(): RabbitTemplate {
         val template = RabbitTemplate(connectionFactory)
         template.messageConverter = jsonMessageConverter()
         return template
