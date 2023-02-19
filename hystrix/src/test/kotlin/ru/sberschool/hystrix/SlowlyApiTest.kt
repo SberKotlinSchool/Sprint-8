@@ -35,6 +35,24 @@ class SlowlyApiTest {
     }
 
     @Test
+    fun `getPokemon() returns real data`() {
+        MockServerClient("127.0.0.1", 18080)
+            .`when`(
+                HttpRequest.request()
+                    .withMethod("GET")
+                    .withPath("/pokemon/25")
+            )
+            .respond(
+                HttpResponse.response()
+                    .withStatusCode(200)
+                    .withDelay(TimeUnit.SECONDS, 0)
+                    .withBody("{\"id\": 25, \"name\": \"pikachu\", \"height\": 4, \"weight\": 60}")
+            )
+
+        assertEquals(Pokemon(25, "pikachu", height = 4, weight = 60), client.getPokemon())
+    }
+
+    @Test
     fun `getSomething() should return predefined data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
@@ -42,15 +60,15 @@ class SlowlyApiTest {
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/pokemon/25")
             )
             .respond(
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 5) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals(Pokemon(-1, "Timeout expired"), client.getPokemon())
     }
 }
