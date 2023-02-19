@@ -1,0 +1,31 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+#rabbit:
+#  exchange: distributor_exchange
+#  keys:
+#    distributor: distributor.placeOrder.MorningCake.#
+#    retailer: retailer.MorningCake.#
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kotlin
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      max-lifetime: 2000000
+      maximum-pool-size: 10
+      idle-timeout: 600000
+      minimum-idle: 1
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+rabbit.exchange.name: distributor_exchange
+consumer.routing.prefix: retailer.MorningCake
+publisher.routing.format: distributor.placeOrder.MorningCake.%s
