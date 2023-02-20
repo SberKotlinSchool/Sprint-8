@@ -7,10 +7,7 @@ import feign.jackson.JacksonDecoder
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockserver.client.server.MockServerClient
 import org.mockserver.integration.ClientAndServer
-import org.mockserver.model.HttpRequest
-import org.mockserver.model.HttpResponse
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
@@ -20,7 +17,13 @@ class SlowlyApiTest {
         .decoder(JacksonDecoder())
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2", FallbackSlowlyApi())
+    val clientFB = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/ap/v2", FallbackSlowlyApi())
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -35,22 +38,13 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
-        // given
-        MockServerClient("127.0.0.1", 18080)
-            .`when`(
-                // задаем матчер для нашего запроса
-                HttpRequest.request()
-                    .withMethod("GET")
-                    .withPath("/")
-            )
-            .respond(
-                // наш запрос попадает на таймаут
-                HttpResponse.response()
-                    .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
-            )
+    fun `getSomething(1) should return hp`() {
+        assertEquals("hp", client.getSomething(1).name)
+    }
+
+    @Test
+    fun `getSomething(1) should return predefined data`() {
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("predefined data", clientFB.getSomething(1).name)
     }
 }
