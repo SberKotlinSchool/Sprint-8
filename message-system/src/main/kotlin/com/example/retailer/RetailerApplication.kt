@@ -2,8 +2,10 @@ package com.example.retailer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @SpringBootApplication
+@EnableTransactionManagement
 class RetailerApplication
 
 fun main(args: Array<String>) {
