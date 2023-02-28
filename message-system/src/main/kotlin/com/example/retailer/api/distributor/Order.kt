@@ -7,6 +7,7 @@ import javax.persistence.*
  * Описание заказа
  */
 @Entity
+@Table(name = "orders")
 data class Order(
     /**
      * Уникальный идентификатор заказа на стороне ретейлера
