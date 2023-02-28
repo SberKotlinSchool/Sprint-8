@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableRabbit
 class RabbitMqConfig(
-    @Value("\${rabbit.exchange.name}")
+    @Value("\${rabbitmq.exchange.name}")
     private val rabbitExchangeName: String,
 
     @Value("\${consumer.routing.prefix}")
