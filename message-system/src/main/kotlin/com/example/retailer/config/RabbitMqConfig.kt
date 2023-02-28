@@ -14,11 +14,14 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableRabbit
 class RabbitMqConfig(
+    @Value("\${rabbitmq.queue}")
+    private val queueName: String? = null,
+
     @Value("\${rabbitmq.exchange.name}")
-    private val rabbitExchangeName: String,
+    private val rabbitExchangeName: String? = null,
 
     @Value("\${consumer.routing.prefix}")
-    private val consumerRoutingPrefix: String
+    private val consumerRoutingPrefix: String? = null
 ) {
     @Bean
     fun jsonMessageConverter(): MessageConverter = Jackson2JsonMessageConverter()
@@ -34,8 +37,7 @@ class RabbitMqConfig(
     fun exchange(): TopicExchange = TopicExchange(rabbitExchangeName)
 
     @Bean
-    fun queue(): Queue = AnonymousQueue()
-
+    fun queue(): Queue = Queue(queueName, false)
 
     @Bean
     fun binding(): Binding = BindingBuilder.bind(queue())
