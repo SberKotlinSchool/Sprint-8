@@ -1,0 +1,30 @@
+rabbitmq:
+  queue: retailer
+  exchange:
+    name: distributor_exchange
+
+consumer:
+  routing:
+    prefix: retailer.Astafex
+
+publisher:
+  routing:
+    format: distributor.placeOrder.Astafex.%s
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+logging:
+  level:
+    org.springframework.web: DEBUG
