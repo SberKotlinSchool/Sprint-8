@@ -15,12 +15,6 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
-        .client(ApacheHttpClient())
-        .decoder(JacksonDecoder())
-        // для удобства тестирования задаем таймауты на 1 секунду
-        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
-        .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -34,15 +28,42 @@ class SlowlyApiTest {
         mockServer.stop()
     }
 
+
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getPersonById(id) should return real object`() {
+        val client: SlowlyApi = HystrixFeign
+            .builder()
+            .client(ApacheHttpClient())
+            .decoder(JacksonDecoder())
+            // для удобства тестирования задаем таймауты на 1 секунду
+            .options(Request.Options(5, TimeUnit.SECONDS, 5, TimeUnit.SECONDS, true))
+            .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2/", FallbackSlowlyApi())
+
+        val expectedPokemon = Pokemon(id = 1, name = "bulbasaur", baseExperience = 64, height = 7, weight = 69)
+        val actualPokemon = client.getPokemon(expectedPokemon.id!!)
+
+        assertEquals(expectedPokemon, actualPokemon)
+    }
+
+    @Test
+    fun `getPersonById(id) should return predefined data`() {
+        val mockClient: SlowlyApi = HystrixFeign
+            .builder()
+            .client(ApacheHttpClient())
+            .decoder(JacksonDecoder())
+            // для удобства тестирования задаем таймауты на 1 секунду
+            .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+            .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+
+        val id = 0L
+
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("GET /person/$id")
             )
             .respond(
                 // наш запрос попадает на таймаут
@@ -51,6 +72,6 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals(Pokemon(-1, "NONE"), mockClient.getPokemon(id))
     }
 }
