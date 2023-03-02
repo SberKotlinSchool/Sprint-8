@@ -1,3 +1,3 @@
 package ru.sberschool.hystrix
 
-data class SimpleResponse(val data: String)
+data class User(val name: String)
