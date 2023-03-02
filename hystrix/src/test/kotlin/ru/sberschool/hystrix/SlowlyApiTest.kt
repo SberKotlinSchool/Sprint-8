@@ -35,7 +35,7 @@ class SlowlyApiTest {
     }
 
     @Test
-    fun `getSomething() should return predefined data`() {
+    fun `getUser() should return predefined data`() {
         // given
         MockServerClient("127.0.0.1", 18080)
             .`when`(
@@ -48,9 +48,31 @@ class SlowlyApiTest {
                 // наш запрос попадает на таймаут
                 HttpResponse.response()
                     .withStatusCode(400)
-                    .withDelay(TimeUnit.SECONDS, 30) //
+                    .withDelay(TimeUnit.SECONDS, 30)
+                    .withBody("{\"name\": \"Ivan\"}")
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("DIvan", client.getUser().name)
+    }
+
+
+    @Test
+    fun `getUser() should return set data`() {
+        // given
+        MockServerClient("127.0.0.1", 18080)
+            .`when`(
+                // задаем матчер для нашего запроса
+                HttpRequest.request()
+                    .withMethod("GET")
+                    .withPath("/user/adm")
+            )
+            .respond(
+                // наш запрос попадает на таймаут
+                HttpResponse.response()
+                    .withStatusCode(200)
+                    .withBody("{\"name\": \"Ivan\"}")
+            )
+        // expect
+        assertEquals("Ivan", client.getUser().name)
     }
 }
