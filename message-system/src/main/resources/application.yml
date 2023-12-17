@@ -1,0 +1,30 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+consumer:
+  routing:
+    prefix: retailer.test
+
+publisher:
+  routing:
+    format: distributor.placeOrder.test.%s
+
+rabbitmq:
+  queue: retailer
+  exchange:
+    name: distributor_exchange

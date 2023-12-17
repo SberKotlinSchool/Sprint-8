@@ -1,1 +1,35 @@
-
+metadata:
+  labels:
+    app: greetings-app
+  name: greetings-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: greetings-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: greetings-app
+    spec:
+      containers:
+        - image: unclevich/greetings:latest
+          name: greetings
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: greetings-app
+  name: greetings-app
+spec:
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: greetings-app
+  type: ClusterIP
