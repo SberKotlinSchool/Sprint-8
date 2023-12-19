@@ -16,7 +16,7 @@ class DistributorPublisherImpl(private val rabbitTemplate: RabbitTemplate, priva
         const val HEADER_ROUTING_KEY = "Notify-RoutingKey"
     }
 
-    @Value("\${rabbitmq.producer.routing.key")
+    @Value("\${rabbitmq.producer.routing.key}")
     lateinit var producerRoutingKey: String
 
     @Value("\${rabbitmq.consumer.routing.key}")
