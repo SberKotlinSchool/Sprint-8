@@ -18,7 +18,7 @@ interface OrderStorage {
     /**
      * Обновление заявки
      */
-    fun updateOrder(order: OrderInfo) : Boolean
+    fun updateOrder(orderInfo: OrderInfo) : Boolean
 
     /**
      * Получение информации о заявке по id или null если не найдено
