@@ -1,1 +1,543 @@
-Разместите в этом файле лог успешного теста
+PS C:\Users\admin\IdeaProjects\Sprint-8> cd message-system
+PS C:\Users\admin\IdeaProjects\Sprint-8\message-system> docker-compose up
+[+] Running 18/6
+ ✔ rabbitmq 12 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                                                                                                                                                       23.8s
+ ✔ distributor 4 layers [⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                                                                                                                                                              7.8s
+
+
+
+
+[+] Running 3/3
+ ✔ Network message-system_default  Created                                                                                                                                                                                                                                                                         0.0s
+ ✔ Container rabbitmq              Created                                                                                                                                                                                                                                                                         1.2s
+ ✔ Container distributor           Created                                                                                                                                                                                                                                                                         0.1s
+Attaching to distributor, rabbitmq
+distributor  | 
+distributor  |   .   ____          _            __ _ _
+distributor  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+distributor  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+distributor  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+distributor  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+distributor  |  =========|_|==============|___/=/_/_/_/
+distributor  |  :: Spring Boot ::                (v2.5.6)
+distributor  | 
+distributor  | 2023-12-18 02:44:08.623  INFO 1 --- [           main] c.e.d.DistributorApplicationKt           : Starting DistributorApplicationKt v1.0.0-SNAPSHOT using Java 1.8.0_212 on f1df1b6dc73d with PID 1 (/app.jar started by root in /)
+distributor  | 2023-12-18 02:44:08.625  INFO 1 --- [           main] c.e.d.DistributorApplicationKt           : No active profile set, falling back to default profiles: default
+distributor  | 2023-12-18 02:44:09.819  INFO 1 --- [           main] c.e.distributor.debug.SampleProducer     : SampleProducer is DISABLED
+distributor  | 2023-12-18 02:44:09.954  INFO 1 --- [           main] tConfig$$EnhancerBySpringCGLIB$$6edc3fd5 : Build listener container
+distributor  | 2023-12-18 02:44:10.019  INFO 1 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [rabbitmq:5672]
+distributor  | 2023-12-18 02:44:10.025  INFO 1 --- [           main] o.s.a.r.l.DirectMessageListenerContainer : Broker not available; cannot force queue declarations during start: java.net.ConnectException: Connection refused (Connection refused)
+distributor  | 2023-12-18 02:44:10.030  INFO 1 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [rabbitmq:5672]
+distributor  | 2023-12-18 02:44:10.034 ERROR 1 --- [           main] o.s.a.r.l.DirectMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+distributor  | 
+distributor  | org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused (Connection refused)
+distributor  |  at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2163) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2136) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2116) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:407) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:391) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1914) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1895) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.doRedeclareElementsIfNecessary(DirectMessageListenerContainer.java:640) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.actualStart(DirectMessageListenerContainer.java:443) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.doStart(DirectMessageListenerContainer.java:406) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1378) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) [spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54) [spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) [spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at java.lang.Iterable.forEach(Iterable.java:75) ~[na:1.8.0_212]
+distributor  |  at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) [spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) [spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:935) ~[spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586) ~[spring-context-5.3.12.jar!/:5.3.12]
+distributor  |  at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-2.5.6.jar!/:2.5.6]
+distributor  |  at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434) ~[spring-boot-2.5.6.jar!/:2.5.6]
+distributor  |  at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) ~[spring-boot-2.5.6.jar!/:2.5.6]
+distributor  |  at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-2.5.6.jar!/:2.5.6]
+distributor  |  at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) ~[spring-boot-2.5.6.jar!/:2.5.6]
+distributor  |  at com.example.distributor.DistributorApplicationKt.main(DistributorApplication.kt:17) ~[classes!/:1.0.0-SNAPSHOT]
+distributor  |  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_212]
+distributor  |  at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_212]
+distributor  |  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_212]
+distributor  |  at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_212]
+distributor  |  at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) ~[app.jar:1.0.0-SNAPSHOT]
+distributor  |  at org.springframework.boot.loader.Launcher.launch(Launcher.java:108) ~[app.jar:1.0.0-SNAPSHOT]
+distributor  |  at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) ~[app.jar:1.0.0-SNAPSHOT]
+distributor  |  at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) ~[app.jar:1.0.0-SNAPSHOT]
+distributor  | Caused by: java.net.ConnectException: Connection refused (Connection refused)
+distributor  |  at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_212]
+distributor  |  at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_212]
+distributor  |  at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_212]
+distributor  |  at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  ... 35 common frames omitted
+distributor  | 
+distributor  | 2023-12-18 02:44:10.034  INFO 1 --- [           main] o.s.a.r.l.DirectMessageListenerContainer : Container initialized for queues: [order_queue]
+distributor  | 2023-12-18 02:44:10.035  INFO 1 --- [    container-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [rabbitmq:5672]
+distributor  | 2023-12-18 02:44:10.037 ERROR 1 --- [    container-1] o.s.a.r.l.DirectMessageListenerContainer : Error creating consumer; retrying in 5000
+distributor  | 
+distributor  | org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused (Connection refused)
+distributor  |  at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.doConsumeFromQueue(DirectMessageListenerContainer.java:717) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.consumeFromQueue(DirectMessageListenerContainer.java:699) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.startConsumers(DirectMessageListenerContainer.java:604) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer.lambda$actualStart$4(DirectMessageListenerContainer.java:445) [spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_212]
+distributor  | Caused by: java.net.ConnectException: Connection refused (Connection refused)
+distributor  |  at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_212]
+distributor  |  at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_212]
+distributor  |  at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_212]
+distributor  |  at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_212]
+distributor  |  at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170) ~[amqp-client-5.12.0.jar!/:5.12.0]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565) ~[spring-rabbit-2.3.11.jar!/:2.3.11]
+distributor  |  ... 6 common frames omitted
+distributor  | 
+distributor  | 2023-12-18 02:44:10.042  INFO 1 --- [           main] c.e.d.DistributorApplicationKt           : Started DistributorApplicationKt in 1.68 seconds (JVM running for 1.998)
+rabbitmq     | 2023-12-18 02:44:10.296587+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:10.305191+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:10.305319+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:10.305339+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:10.305349+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:10.305392+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:10.305432+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:10.305471+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:10.548952+00:00 [notice] <0.44.0> Application syslog exited with reason: stopped
+rabbitmq     | 2023-12-18 02:44:10.549043+00:00 [notice] <0.230.0> Logging: switching to configured handler(s); following messages may not be visible in this log output
+rabbitmq     | 2023-12-18 02:44:10.559962+00:00 [notice] <0.230.0> Logging: configured log handlers are now ACTIVE
+rabbitmq     | 2023-12-18 02:44:10.712462+00:00 [info] <0.230.0> ra: starting system quorum_queues
+rabbitmq     | 2023-12-18 02:44:10.712599+00:00 [info] <0.230.0> starting Ra system: quorum_queues in directory: /var/lib/rabbitmq/mnesia/rabbit@1016d921c68e/quorum/rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:10.755912+00:00 [info] <0.266.0> ra system 'quorum_queues' running pre init for 0 registered servers
+rabbitmq     | 2023-12-18 02:44:10.764875+00:00 [info] <0.267.0> ra: meta data store initialised for system quorum_queues. 0 record(s) recovered
+rabbitmq     | 2023-12-18 02:44:10.777104+00:00 [notice] <0.272.0> WAL: ra_log_wal init, open tbls: ra_log_open_mem_tables, closed tbls: ra_log_closed_mem_tables
+rabbitmq     | 2023-12-18 02:44:10.785950+00:00 [info] <0.230.0> ra: starting system coordination
+rabbitmq     | 2023-12-18 02:44:10.786009+00:00 [info] <0.230.0> starting Ra system: coordination in directory: /var/lib/rabbitmq/mnesia/rabbit@1016d921c68e/coordination/rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:10.787136+00:00 [info] <0.279.0> ra system 'coordination' running pre init for 0 registered servers
+rabbitmq     | 2023-12-18 02:44:10.787741+00:00 [info] <0.280.0> ra: meta data store initialised for system coordination. 0 record(s) recovered
+rabbitmq     | 2023-12-18 02:44:10.787854+00:00 [notice] <0.285.0> WAL: ra_coordination_log_wal init, open tbls: ra_coordination_log_open_mem_tables, closed tbls: ra_coordination_log_closed_mem_tables
+rabbitmq     | 2023-12-18 02:44:10.810574+00:00 [info] <0.230.0>
+rabbitmq     | 2023-12-18 02:44:10.810574+00:00 [info] <0.230.0>  Starting RabbitMQ 3.9.29 on Erlang 25.3.2.7 [jit]
+rabbitmq     | 2023-12-18 02:44:10.810574+00:00 [info] <0.230.0>  Copyright (c) 2007-2023 VMware, Inc. or its affiliates.
+rabbitmq     | 2023-12-18 02:44:10.810574+00:00 [info] <0.230.0>  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+rabbitmq     | 2023-12-18 02:44:10.810652+00:00 [error] <0.230.0> This release series has reached end of life and is no longer supported. Please visit https://rabbitmq.com/versions.html to learn more and upgrade
+rabbitmq     | 
+rabbitmq     |   ##  ##      RabbitMQ 3.9.29
+rabbitmq     |   ##  ##
+rabbitmq     |   ##########  Copyright (c) 2007-2023 VMware, Inc. or its affiliates.
+rabbitmq     |   ######  ##
+rabbitmq     |   ##########  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+rabbitmq     | 
+rabbitmq     |   Erlang:      25.3.2.7 [jit]
+rabbitmq     |   TLS Library: OpenSSL - OpenSSL 3.1.4 24 Oct 2023
+rabbitmq     |   Release series support status: out of support
+rabbitmq     | 
+rabbitmq     |   Doc guides:  https://rabbitmq.com/documentation.html
+rabbitmq     |   Support:     https://rabbitmq.com/contact.html
+rabbitmq     |   Tutorials:   https://rabbitmq.com/getstarted.html
+rabbitmq     |   Monitoring:  https://rabbitmq.com/monitoring.html
+rabbitmq     | 
+rabbitmq     |   Logs: /var/log/rabbitmq/rabbit@1016d921c68e_upgrade.log
+rabbitmq     |         <stdout>
+rabbitmq     | 
+rabbitmq     |   Config file(s): /etc/rabbitmq/conf.d/10-defaults.conf
+rabbitmq     | 
+rabbitmq     |   Starting broker...2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  node           : rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  home dir       : /var/lib/rabbitmq
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  config file(s) : /etc/rabbitmq/conf.d/10-defaults.conf
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  cookie hash    : 67udJYYuO4mWQTlEPGNb/Q==
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  log(s)         : /var/log/rabbitmq/rabbit@1016d921c68e_upgrade.log
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>                 : <stdout>
+rabbitmq     | 2023-12-18 02:44:10.811679+00:00 [info] <0.230.0>  database dir   : /var/lib/rabbitmq/mnesia/rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:11.034391+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:11.034483+00:00 [info] <0.230.0> Feature flags:   [ ] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:11.034506+00:00 [info] <0.230.0> Feature flags:   [ ] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:11.034545+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:11.034617+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:11.034744+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:11.034781+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:11.034853+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:11.034867+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:11.034892+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.205705+00:00 [info] <0.230.0> Running boot step pre_boot defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.205753+00:00 [info] <0.230.0> Running boot step rabbit_global_counters defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.206053+00:00 [info] <0.230.0> Running boot step rabbit_osiris_metrics defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.206134+00:00 [info] <0.230.0> Running boot step rabbit_core_metrics defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.206627+00:00 [info] <0.230.0> Running boot step rabbit_alarm defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.209232+00:00 [info] <0.298.0> Memory high watermark set to 12808 MiB (13430638182 bytes) of 32021 MiB (33576595456 bytes) total
+rabbitmq     | 2023-12-18 02:44:13.211384+00:00 [info] <0.300.0> Enabling free disk space monitoring
+rabbitmq     | 2023-12-18 02:44:13.211414+00:00 [info] <0.300.0> Disk free limit set to 50MB
+rabbitmq     | 2023-12-18 02:44:13.212796+00:00 [info] <0.230.0> Running boot step code_server_cache defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.212870+00:00 [info] <0.230.0> Running boot step file_handle_cache defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.213045+00:00 [info] <0.303.0> Limiting to approx 1048479 file handles (943629 sockets)
+rabbitmq     | 2023-12-18 02:44:13.213174+00:00 [info] <0.304.0> FHC read buffering: OFF
+rabbitmq     | 2023-12-18 02:44:13.213245+00:00 [info] <0.304.0> FHC write buffering: ON
+rabbitmq     | 2023-12-18 02:44:13.214016+00:00 [info] <0.230.0> Running boot step worker_pool defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.214074+00:00 [info] <0.287.0> Will use 12 processes for default worker pool
+rabbitmq     | 2023-12-18 02:44:13.214099+00:00 [info] <0.287.0> Starting worker pool 'worker_pool' with 12 processes in it
+rabbitmq     | 2023-12-18 02:44:13.214883+00:00 [info] <0.230.0> Running boot step database defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.215140+00:00 [info] <0.230.0> Node database directory at /var/lib/rabbitmq/mnesia/rabbit@1016d921c68e is empty. Assuming we need to join an existing cluster or initialise from scratch...
+rabbitmq     | 2023-12-18 02:44:13.215215+00:00 [info] <0.230.0> Configured peer discovery backend: rabbit_peer_discovery_classic_config
+rabbitmq     | 2023-12-18 02:44:13.215277+00:00 [info] <0.230.0> Will try to lock with peer discovery backend rabbit_peer_discovery_classic_config
+rabbitmq     | 2023-12-18 02:44:13.215311+00:00 [info] <0.230.0> All discovered existing cluster peers:
+rabbitmq     | 2023-12-18 02:44:13.215328+00:00 [info] <0.230.0> Discovered no peer nodes to cluster with. Some discovery backends can filter nodes out based on a readiness criteria. Enabling debug logging might help troubleshoot.
+rabbitmq     | 2023-12-18 02:44:13.216770+00:00 [notice] <0.44.0> Application mnesia exited with reason: stopped
+rabbitmq     | 2023-12-18 02:44:13.309524+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.309696+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.316366+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.316477+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.316508+00:00 [info] <0.230.0> Feature flag `drop_unroutable_metric`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.316813+00:00 [info] <0.230.0> Feature flag `drop_unroutable_metric`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.317726+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.317767+00:00 [info] <0.230.0> Feature flags:   [~] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.318013+00:00 [info] <0.230.0> Feature flags:   [ ] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.318043+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.318085+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.318170+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.318222+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.318305+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.318392+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.318504+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.324162+00:00 [info] <0.230.0> Feature flag `drop_unroutable_metric`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.325107+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.325146+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.325194+00:00 [info] <0.230.0> Feature flags:   [ ] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.325272+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.325351+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.325400+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.325455+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.325502+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.325549+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.325596+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.331202+00:00 [info] <0.230.0> Feature flag `empty_basic_get_metric`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.331296+00:00 [info] <0.230.0> Feature flag `empty_basic_get_metric`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.331924+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.331973+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.332040+00:00 [info] <0.230.0> Feature flags:   [~] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.332061+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.332088+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.332154+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.332225+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.332293+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.332350+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.332411+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.338649+00:00 [info] <0.230.0> Feature flag `empty_basic_get_metric`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.340589+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.340650+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.340682+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.340728+00:00 [info] <0.230.0> Feature flags:   [ ] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.340759+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.340793+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.340821+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.340842+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.340904+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.340929+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.348107+00:00 [info] <0.230.0> Feature flag `implicit_default_bindings`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.348260+00:00 [info] <0.230.0> Feature flag `implicit_default_bindings`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.349204+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.349267+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.349289+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.349332+00:00 [info] <0.230.0> Feature flags:   [~] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.349394+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.349459+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.349596+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.349655+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.349762+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.349840+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.356130+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 0 retries left
+rabbitmq     | 2023-12-18 02:44:13.356227+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.356280+00:00 [info] <0.230.0> Feature flag `implicit_default_bindings`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.358167+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.358225+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.358303+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.358319+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.358344+00:00 [info] <0.230.0> Feature flags:   [ ] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.358372+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.358391+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.358411+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.358434+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.358453+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.366169+00:00 [info] <0.230.0> Feature flag `maintenance_mode_status`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.366331+00:00 [info] <0.230.0> Feature flag `maintenance_mode_status`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.367109+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.367157+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.367191+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.367250+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.367272+00:00 [info] <0.230.0> Feature flags:   [~] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.367369+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.367397+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.367442+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.367487+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.367504+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.374317+00:00 [info] <0.230.0> Creating table rabbit_node_maintenance_states for feature flag `maintenance_mode_status`
+rabbitmq     | 2023-12-18 02:44:13.378730+00:00 [info] <0.230.0> Feature flag `maintenance_mode_status`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.380687+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.380742+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.380837+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.380969+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.381063+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.381148+00:00 [info] <0.230.0> Feature flags:   [ ] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.381214+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.381287+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.381334+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.381436+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.387543+00:00 [info] <0.230.0> Feature flag `quorum_queue`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.387693+00:00 [info] <0.230.0> Feature flag `quorum_queue`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.388320+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.388383+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.388458+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.388561+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.388667+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.388783+00:00 [info] <0.230.0> Feature flags:   [~] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.388848+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.388975+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.389089+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.389139+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.394623+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.394741+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.394764+00:00 [info] <0.230.0> Feature flag `quorum_queue`:   migrating Mnesia table rabbit_queue...
+rabbitmq     | 2023-12-18 02:44:13.407723+00:00 [info] <0.230.0> Feature flag `quorum_queue`:   migrating Mnesia table rabbit_durable_queue...
+rabbitmq     | 2023-12-18 02:44:13.421725+00:00 [info] <0.230.0> Feature flag `quorum_queue`:   Mnesia tables migration done
+rabbitmq     | 2023-12-18 02:44:13.421785+00:00 [info] <0.230.0> Feature flag `quorum_queue`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.423047+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.423127+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.423182+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.423205+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.423217+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.423280+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.423293+00:00 [info] <0.230.0> Feature flags:   [ ] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.423301+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.423321+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.423461+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.428520+00:00 [info] <0.230.0> Feature flag `stream_queue`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.428695+00:00 [info] <0.230.0> Feature flag `stream_queue`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.429576+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.429705+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.429729+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.429744+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.429851+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.429901+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.429922+00:00 [info] <0.230.0> Feature flags:   [~] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.430014+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.430065+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.430083+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.435383+00:00 [info] <0.230.0> Feature flag `stream_queue`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.436992+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.437039+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.437084+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.437103+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.437112+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.437133+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.437146+00:00 [info] <0.230.0> Feature flags:   [x] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.437189+00:00 [info] <0.230.0> Feature flags:   [ ] user_limits
+rabbitmq     | 2023-12-18 02:44:13.437235+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.437315+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.443934+00:00 [info] <0.230.0> Feature flag `user_limits`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.444048+00:00 [info] <0.230.0> Feature flag `user_limits`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.444933+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.445025+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.445090+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.445190+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.445334+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.445409+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.445457+00:00 [info] <0.230.0> Feature flags:   [x] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.445509+00:00 [info] <0.230.0> Feature flags:   [~] user_limits
+rabbitmq     | 2023-12-18 02:44:13.445570+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.445616+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.451744+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.451833+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.467117+00:00 [info] <0.230.0> Feature flag `user_limits`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.468879+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.468933+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.468964+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.468978+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.468990+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.469030+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.469062+00:00 [info] <0.230.0> Feature flags:   [x] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.469077+00:00 [info] <0.230.0> Feature flags:   [x] user_limits
+rabbitmq     | 2023-12-18 02:44:13.469110+00:00 [info] <0.230.0> Feature flags:   [ ] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.469172+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.475401+00:00 [info] <0.230.0> Feature flag `virtual_host_metadata`: supported, attempt to enable...
+rabbitmq     | 2023-12-18 02:44:13.475504+00:00 [info] <0.230.0> Feature flag `virtual_host_metadata`: mark as enabled=state_changing
+rabbitmq     | 2023-12-18 02:44:13.476113+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.476178+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.476244+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.476340+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.476491+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.476590+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.476701+00:00 [info] <0.230.0> Feature flags:   [x] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.476790+00:00 [info] <0.230.0> Feature flags:   [x] user_limits
+rabbitmq     | 2023-12-18 02:44:13.476912+00:00 [info] <0.230.0> Feature flags:   [~] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.476962+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.482768+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.482898+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.498063+00:00 [info] <0.230.0> Feature flag `virtual_host_metadata`: mark as enabled=true
+rabbitmq     | 2023-12-18 02:44:13.499743+00:00 [info] <0.230.0> Feature flags: list of feature flags found:
+rabbitmq     | 2023-12-18 02:44:13.499814+00:00 [info] <0.230.0> Feature flags:   [x] drop_unroutable_metric
+rabbitmq     | 2023-12-18 02:44:13.499840+00:00 [info] <0.230.0> Feature flags:   [x] empty_basic_get_metric
+rabbitmq     | 2023-12-18 02:44:13.499896+00:00 [info] <0.230.0> Feature flags:   [x] implicit_default_bindings
+rabbitmq     | 2023-12-18 02:44:13.500035+00:00 [info] <0.230.0> Feature flags:   [x] maintenance_mode_status
+rabbitmq     | 2023-12-18 02:44:13.500193+00:00 [info] <0.230.0> Feature flags:   [x] quorum_queue
+rabbitmq     | 2023-12-18 02:44:13.500338+00:00 [info] <0.230.0> Feature flags:   [x] stream_queue
+rabbitmq     | 2023-12-18 02:44:13.500391+00:00 [info] <0.230.0> Feature flags:   [x] user_limits
+rabbitmq     | 2023-12-18 02:44:13.500462+00:00 [info] <0.230.0> Feature flags:   [x] virtual_host_metadata
+rabbitmq     | 2023-12-18 02:44:13.500511+00:00 [info] <0.230.0> Feature flags: feature flag states written to disk: yes
+rabbitmq     | 2023-12-18 02:44:13.505604+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.505743+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.540900+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq     | 2023-12-18 02:44:13.541016+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq     | 2023-12-18 02:44:13.541038+00:00 [info] <0.230.0> Peer discovery backend rabbit_peer_discovery_classic_config does not support registration, skipping registration.
+rabbitmq     | 2023-12-18 02:44:13.541065+00:00 [info] <0.230.0> Will try to unlock with peer discovery backend rabbit_peer_discovery_classic_config
+rabbitmq     | 2023-12-18 02:44:13.541156+00:00 [info] <0.230.0> Running boot step database_sync defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541270+00:00 [info] <0.230.0> Running boot step feature_flags defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541459+00:00 [info] <0.230.0> Running boot step codec_correctness_check defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541512+00:00 [info] <0.230.0> Running boot step external_infrastructure defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541529+00:00 [info] <0.230.0> Running boot step rabbit_event defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541726+00:00 [info] <0.230.0> Running boot step rabbit_registry defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541832+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_amqplain defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541880+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_cr_demo defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541904+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_plain defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541921+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_direct defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.541976+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_fanout defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542050+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_headers defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542085+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_topic defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542108+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_all defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542140+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_exactly defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542218+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_nodes defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542341+00:00 [info] <0.230.0> Running boot step rabbit_priority_queue defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542377+00:00 [info] <0.230.0> Priority queues enabled, real BQ is rabbit_variable_queue
+rabbitmq     | 2023-12-18 02:44:13.542465+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_client_local defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542530+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_min_masters defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542561+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_random defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542622+00:00 [info] <0.230.0> Running boot step kernel_ready defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542661+00:00 [info] <0.230.0> Running boot step rabbit_sysmon_minder defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.542949+00:00 [info] <0.230.0> Running boot step rabbit_epmd_monitor defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.543668+00:00 [info] <0.573.0> epmd monitor knows us, inter-node communication (distribution) port: 25672
+rabbitmq     | 2023-12-18 02:44:13.543778+00:00 [info] <0.230.0> Running boot step guid_generator defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.567872+00:00 [info] <0.230.0> Running boot step rabbit_node_monitor defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.568123+00:00 [info] <0.577.0> Starting rabbit_node_monitor
+rabbitmq     | 2023-12-18 02:44:13.568298+00:00 [info] <0.230.0> Running boot step delegate_sup defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.568729+00:00 [info] <0.230.0> Running boot step rabbit_memory_monitor defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.568950+00:00 [info] <0.230.0> Running boot step core_initialized defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.568991+00:00 [info] <0.230.0> Running boot step upgrade_queues defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.573528+00:00 [info] <0.230.0> message_store upgrades: 1 to apply
+rabbitmq     | 2023-12-18 02:44:13.573639+00:00 [info] <0.230.0> message_store upgrades: Applying rabbit_variable_queue:move_messages_to_vhost_store
+rabbitmq     | 2023-12-18 02:44:13.573858+00:00 [info] <0.230.0> message_store upgrades: No durable queues found. Skipping message store migration
+rabbitmq     | 2023-12-18 02:44:13.573895+00:00 [info] <0.230.0> message_store upgrades: Removing the old message store data
+rabbitmq     | 2023-12-18 02:44:13.574630+00:00 [info] <0.230.0> message_store upgrades: All upgrades applied successfully
+rabbitmq     | 2023-12-18 02:44:13.591498+00:00 [info] <0.230.0> Running boot step channel_tracking defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.605087+00:00 [info] <0.230.0> Setting up a table for channel tracking on this node: tracked_channel_on_node_rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:13.646459+00:00 [info] <0.230.0> Setting up a table for channel tracking on this node: tracked_channel_table_per_user_on_node_rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:13.646667+00:00 [info] <0.230.0> Running boot step rabbit_channel_tracking_handler defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.646782+00:00 [info] <0.230.0> Running boot step connection_tracking defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.650321+00:00 [info] <0.230.0> Setting up a table for connection tracking on this node: tracked_connection_on_node_rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:13.653494+00:00 [info] <0.230.0> Setting up a table for per-vhost connection counting on this node: tracked_connection_per_vhost_on_node_rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:13.656720+00:00 [info] <0.230.0> Setting up a table for per-user connection counting on this node: tracked_connection_table_per_user_on_node_rabbit@1016d921c68e
+rabbitmq     | 2023-12-18 02:44:13.656994+00:00 [info] <0.230.0> Running boot step rabbit_connection_tracking_handler defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657082+00:00 [info] <0.230.0> Running boot step rabbit_exchange_parameters defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657151+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_misc defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657264+00:00 [info] <0.230.0> Running boot step rabbit_policies defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657542+00:00 [info] <0.230.0> Running boot step rabbit_policy defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657613+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_validator defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657638+00:00 [info] <0.230.0> Running boot step rabbit_quorum_memory_manager defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657671+00:00 [info] <0.230.0> Running boot step rabbit_stream_coordinator defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657780+00:00 [info] <0.230.0> Running boot step rabbit_vhost_limit defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.657837+00:00 [info] <0.230.0> Running boot step rabbit_mgmt_reset_handler defined by app rabbitmq_management
+rabbitmq     | 2023-12-18 02:44:13.657883+00:00 [info] <0.230.0> Running boot step rabbit_mgmt_db_handler defined by app rabbitmq_management_agent
+rabbitmq     | 2023-12-18 02:44:13.657982+00:00 [info] <0.230.0> Management plugin: using rates mode 'basic'
+rabbitmq     | 2023-12-18 02:44:13.658507+00:00 [info] <0.230.0> Running boot step recovery defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.659607+00:00 [info] <0.230.0> Running boot step empty_db_check defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.659669+00:00 [info] <0.230.0> Will seed default virtual host and user...
+rabbitmq     | 2023-12-18 02:44:13.659752+00:00 [info] <0.230.0> Adding vhost '/' (description: 'Default virtual host', tags: [])
+rabbitmq     | 2023-12-18 02:44:13.675268+00:00 [info] <0.638.0> Making sure data directory '/var/lib/rabbitmq/mnesia/rabbit@1016d921c68e/msg_stores/vhosts/628WB79CIFDYO9LJI6DKMI09L' for vhost '/' exists
+rabbitmq     | 2023-12-18 02:44:13.676287+00:00 [info] <0.638.0> Setting segment_entry_count for vhost '/' with 0 queues to '2048'
+rabbitmq     | 2023-12-18 02:44:13.679227+00:00 [info] <0.638.0> Starting message stores for vhost '/'
+rabbitmq     | 2023-12-18 02:44:13.679360+00:00 [info] <0.642.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_transient": using rabbit_msg_store_ets_index to provide index
+rabbitmq     | 2023-12-18 02:44:13.680462+00:00 [info] <0.638.0> Started message store of type transient for vhost '/'
+rabbitmq     | 2023-12-18 02:44:13.680566+00:00 [info] <0.646.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": using rabbit_msg_store_ets_index to provide index
+rabbitmq     | 2023-12-18 02:44:13.681160+00:00 [warning] <0.646.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": rebuilding indices from scratch
+rabbitmq     | 2023-12-18 02:44:13.681754+00:00 [info] <0.638.0> Started message store of type persistent for vhost '/'
+rabbitmq     | 2023-12-18 02:44:13.681897+00:00 [info] <0.638.0> Recovering 0 queues of type rabbit_classic_queue took 5ms
+rabbitmq     | 2023-12-18 02:44:13.681937+00:00 [info] <0.638.0> Recovering 0 queues of type rabbit_quorum_queue took 0ms
+rabbitmq     | 2023-12-18 02:44:13.681961+00:00 [info] <0.638.0> Recovering 0 queues of type rabbit_stream_queue took 0ms
+rabbitmq     | 2023-12-18 02:44:13.685485+00:00 [info] <0.230.0> Created user 'guest'
+rabbitmq     | 2023-12-18 02:44:13.687584+00:00 [info] <0.230.0> Successfully set user tags for user 'guest' to [administrator]
+rabbitmq     | 2023-12-18 02:44:13.689691+00:00 [info] <0.230.0> Successfully set permissions for 'guest' in virtual host '/' to '.*', '.*', '.*'
+rabbitmq     | 2023-12-18 02:44:13.689747+00:00 [info] <0.230.0> Running boot step rabbit_looking_glass defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.689767+00:00 [info] <0.230.0> Running boot step rabbit_core_metrics_gc defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.689921+00:00 [info] <0.230.0> Running boot step background_gc defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690077+00:00 [info] <0.230.0> Running boot step routing_ready defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690118+00:00 [info] <0.230.0> Running boot step pre_flight defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690195+00:00 [info] <0.230.0> Running boot step notify_cluster defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690283+00:00 [info] <0.230.0> Running boot step networking defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690350+00:00 [info] <0.230.0> Running boot step definition_import_worker_pool defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.690447+00:00 [info] <0.287.0> Starting worker pool 'definition_import_pool' with 12 processes in it
+rabbitmq     | 2023-12-18 02:44:13.691235+00:00 [info] <0.230.0> Running boot step cluster_name defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.691335+00:00 [info] <0.230.0> Initialising internal cluster ID to 'rabbitmq-cluster-id-GbLPRndb_Ggz7pyKZwvKrQ'
+rabbitmq     | 2023-12-18 02:44:13.693644+00:00 [info] <0.230.0> Running boot step direct_client defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.693729+00:00 [info] <0.230.0> Running boot step rabbit_maintenance_mode_state defined by app rabbit
+rabbitmq     | 2023-12-18 02:44:13.693770+00:00 [info] <0.230.0> Creating table rabbit_node_maintenance_states for feature flag `maintenance_mode_status`
+rabbitmq     | 2023-12-18 02:44:13.693925+00:00 [info] <0.230.0> Running boot step rabbit_management_load_definitions defined by app rabbitmq_management
+rabbitmq     | 2023-12-18 02:44:13.694041+00:00 [info] <0.688.0> Resetting node maintenance status
+rabbitmq     | 2023-12-18 02:44:13.701751+00:00 [info] <0.747.0> Management plugin: HTTP (non-TLS) listener started on port 15672
+rabbitmq     | 2023-12-18 02:44:13.701880+00:00 [info] <0.775.0> Statistics database started.
+rabbitmq     | 2023-12-18 02:44:13.702049+00:00 [info] <0.774.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+rabbitmq     | 2023-12-18 02:44:13.706967+00:00 [info] <0.789.0> Prometheus metrics: HTTP (non-TLS) listener started on port 15692
+rabbitmq     | 2023-12-18 02:44:13.707158+00:00 [info] <0.688.0> Ready to start client connection listeners
+rabbitmq     | 2023-12-18 02:44:13.708486+00:00 [info] <0.833.0> started TCP listener on [::]:5672
+rabbitmq     |  completed with 4 plugins.
+rabbitmq     | 2023-12-18 02:44:13.758616+00:00 [info] <0.688.0> Server startup complete; 4 plugins started.
+rabbitmq     | 2023-12-18 02:44:13.758616+00:00 [info] <0.688.0>  * rabbitmq_prometheus
+rabbitmq     | 2023-12-18 02:44:13.758616+00:00 [info] <0.688.0>  * rabbitmq_management
+rabbitmq     | 2023-12-18 02:44:13.758616+00:00 [info] <0.688.0>  * rabbitmq_web_dispatch
+rabbitmq     | 2023-12-18 02:44:13.758616+00:00 [info] <0.688.0>  * rabbitmq_management_agent
+distributor  | 2023-12-18 02:44:15.037  INFO 1 --- [    container-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [rabbitmq:5672]
+rabbitmq     | 2023-12-18 02:44:15.046126+00:00 [info] <0.836.0> accepting AMQP connection <0.836.0> (172.18.0.3:59546 -> 172.18.0.2:5672)
+rabbitmq     | 2023-12-18 02:44:15.078641+00:00 [info] <0.836.0> Connection <0.836.0> (172.18.0.3:59546 -> 172.18.0.2:5672) has a client-provided name: rabbitConnectionFactory#402e37bc:3
+rabbitmq     | 2023-12-18 02:44:15.081846+00:00 [info] <0.836.0> connection <0.836.0> (172.18.0.3:59546 -> 172.18.0.2:5672 - rabbitConnectionFactory#402e37bc:3): user 'guest' authenticated and granted access to vhost '/'
+distributor  | 2023-12-18 02:44:15.084  INFO 1 --- [    container-1] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#402e37bc:3/SimpleConnection@2ec115d [delegate=amqp://guest@172.18.0.2:5672/, localPort= 59546]
+distributor  | 2023-12-18 02:44:15.087  INFO 1 --- [    container-1] o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-delete, or exclusive Queue (order_queue) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the conn
+ection factory is alive, but all messages will be lost.
+distributor  | 2023-12-18 02:44:15.118  INFO 1 --- [    container-1] o.s.a.r.l.DirectMessageListenerContainer : SimpleConsumer [queue=order_queue, index=0, consumerTag=amq.ctag-oP3Pj0jw8MrW9Mq1AY6BiQ identity=4b46e53c] started
+distributor  | 2023-12-18 02:44:15.122  INFO 1 --- [nsumerMonitor-1] o.s.a.r.l.DirectMessageListenerContainer : SimpleConsumer [queue=order_queue, index=0, consumerTag=amq.ctag-JaHXYTM2dfWWN9d-DA_f5w identity=caf0120] started
+rabbitmq     | 2023-12-18 02:46:06.318763+00:00 [info] <0.861.0> accepting AMQP connection <0.861.0> (172.18.0.1:47348 -> 172.18.0.2:5672)
+rabbitmq     | 2023-12-18 02:46:06.337090+00:00 [info] <0.861.0> Connection <0.861.0> (172.18.0.1:47348 -> 172.18.0.2:5672) has a client-provided name: rabbitConnectionFactory#5ebfe7fa:0
+rabbitmq     | 2023-12-18 02:46:06.341544+00:00 [info] <0.861.0> connection <0.861.0> (172.18.0.1:47348 -> 172.18.0.2:5672 - rabbitConnectionFactory#5ebfe7fa:0): user 'guest' authenticated and granted access to vhost '/'
+rabbitmq     | 2023-12-18 02:46:07.417551+00:00 [info] <0.861.0> closing AMQP connection <0.861.0> (172.18.0.1:47348 -> 172.18.0.2:5672 - rabbitConnectionFactory#5ebfe7fa:0, vhost: '/', user: 'guest')
+rabbitmq     | 2023-12-18 02:47:48.313037+00:00 [info] <0.907.0> accepting AMQP connection <0.907.0> (172.18.0.1:38580 -> 172.18.0.2:5672)
+rabbitmq     | 2023-12-18 02:47:48.332314+00:00 [info] <0.907.0> Connection <0.907.0> (172.18.0.1:38580 -> 172.18.0.2:5672) has a client-provided name: rabbitConnectionFactory#1b556a88:0
+rabbitmq     | 2023-12-18 02:47:48.336463+00:00 [info] <0.907.0> connection <0.907.0> (172.18.0.1:38580 -> 172.18.0.2:5672 - rabbitConnectionFactory#1b556a88:0): user 'guest' authenticated and granted access to vhost '/'
+rabbitmq     | 2023-12-18 02:47:49.406402+00:00 [info] <0.907.0> closing AMQP connection <0.907.0> (172.18.0.1:38580 -> 172.18.0.2:5672 - rabbitConnectionFactory#1b556a88:0, vhost: '/', user: 'guest')
+rabbitmq     | 2023-12-18 02:50:56.122357+00:00 [info] <0.928.0> accepting AMQP connection <0.928.0> (172.18.0.1:44600 -> 172.18.0.2:5672)
+rabbitmq     | 2023-12-18 02:50:56.138568+00:00 [info] <0.928.0> Connection <0.928.0> (172.18.0.1:44600 -> 172.18.0.2:5672) has a client-provided name: rabbitConnectionFactory#538f45f1:0
+rabbitmq     | 2023-12-18 02:50:56.143255+00:00 [info] <0.928.0> connection <0.928.0> (172.18.0.1:44600 -> 172.18.0.2:5672 - rabbitConnectionFactory#538f45f1:0): user 'guest' authenticated and granted access to vhost '/'
+distributor  | 2023-12-18 02:50:56.618  INFO 1 --- [pool-1-thread-5] c.e.d.d.DistributorListenerAdapter       : Received raw message: (Body:'{"id":"402880ca8c7ad566018c7ad56caa0000","address":"sample address","recipient":"sample recipient","items":[{"id":1,"name":"Sample item"},{"id":2,"name":"Another item"}]}'
+ MessageProperties [headers={Notify-RoutingKey=retailer.denisov-ie, Notify-Exchange=distributor_exchange, __TypeId__=com.example.retailer.api.distributor.Order}, contentType=application/json, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange
+=distributor_exchange, receivedRoutingKey=distributor.placeOrder.denisov-ie.402880ca8c7ad566018c7ad56caa0000, deliveryTag=1, consumerTag=amq.ctag-oP3Pj0jw8MrW9Mq1AY6BiQ, consumerQueue=order_queue])
+distributor  | 2023-12-18 02:50:56.625  INFO 1 --- [pool-1-thread-5] c.e.d.d.DistributorListenerAdapter       : Received order: Order(id=402880ca8c7ad566018c7ad56caa0000, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])
+distributor  | 2023-12-18 02:50:57.041  INFO 1 --- [atcher-worker-1] c.e.d.distributor.DistributorNotifier    : Notify order: OrderResult(orderId=402880ca8c7ad566018c7ad56caa0000, orderRaw=Order(id=402880ca8c7ad566018c7ad56caa0000, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sampl
+e item), Item(id=2, name=Another item)]), status=CREATED, signature=626d122b5e92c4ba52dc19bcb00378a7, exchange=distributor_exchange, routingKey=retailer.denisov-ie)
+distributor  | 2023-12-18 02:50:57.552  INFO 1 --- [atcher-worker-1] c.e.d.distributor.DistributorNotifier    : Notify order: OrderResult(orderId=402880ca8c7ad566018c7ad56caa0000, orderRaw=Order(id=402880ca8c7ad566018c7ad56caa0000, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sampl
+e item), Item(id=2, name=Another item)]), status=DELIVERED, signature=626d122b5e92c4ba52dc19bcb00378a7, exchange=distributor_exchange, routingKey=retailer.denisov-ie)
+rabbitmq     | 2023-12-18 02:50:58.583389+00:00 [info] <0.928.0> closing AMQP connection <0.928.0> (172.18.0.1:44600 -> 172.18.0.2:5672 - rabbitConnectionFactory#538f45f1:0, vhost: '/', user: 'guest')
+rabbitmq     | 2023-12-18 02:51:05.881733+00:00 [info] <0.958.0> accepting AMQP connection <0.958.0> (172.18.0.1:45662 -> 172.18.0.2:5672)
+rabbitmq     | 2023-12-18 02:51:05.885519+00:00 [info] <0.958.0> Connection <0.958.0> (172.18.0.1:45662 -> 172.18.0.2:5672) has a client-provided name: rabbitConnectionFactory#19ac93d2:0
+rabbitmq     | 2023-12-18 02:51:05.887971+00:00 [info] <0.958.0> connection <0.958.0> (172.18.0.1:45662 -> 172.18.0.2:5672 - rabbitConnectionFactory#19ac93d2:0): user 'guest' authenticated and granted access to vhost '/'
