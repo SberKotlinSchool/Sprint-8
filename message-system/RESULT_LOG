@@ -1,1 +1,90 @@
-Разместите в этом файле лог успешного теста
+2023-12-19 09:52:30.098  INFO 23952 --- [main] c.e.retailer.RetailerApplicationTests    : The following profiles are active: test
+2023-12-19 09:52:30.668  INFO 23952 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-19 09:52:30.731  INFO 23952 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 2 JPA repository interfaces.
+2023-12-19 09:52:31.358  INFO 23952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2023-12-19 09:52:31.367  INFO 23952 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-19 09:52:31.367  INFO 23952 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-12-19 09:52:31.484  INFO 23952 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-19 09:52:31.484  INFO 23952 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1373 ms
+2023-12-19 09:52:31.733  INFO 23952 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-19 09:52:31.784  INFO 23952 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-12-19 09:52:31.893  INFO 23952 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-12-19 09:52:31.970  INFO 23952 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-19 09:52:32.355  INFO 23952 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-19 09:52:32.370  INFO 23952 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-12-19 09:52:32.534  WARN 23952 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2023-12-19 09:52:32.756  INFO 23952 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-19 09:52:32.763  INFO 23952 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-19 09:52:33.325  WARN 23952 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-19 09:52:33.537 DEBUG 23952 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-19 09:52:33.635 DEBUG 23952 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 4 mappings in 'requestMappingHandlerMapping'
+2023-12-19 09:52:33.718 DEBUG 23952 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-19 09:52:33.740 DEBUG 23952 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-19 09:52:34.001  INFO 23952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 63814 (http) with context path ''
+2023-12-19 09:52:34.003  INFO 23952 --- [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: localhost:5672
+2023-12-19 09:52:34.059  INFO 23952 --- [main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: connectionFactory#4afd65fd:0/SimpleConnection@24e2355c [delegate=amqp://guest@127.0.0.1:5672/, localPort= 63817]
+2023-12-19 09:52:34.120  INFO 23952 --- [main] c.e.retailer.RetailerApplicationTests    : Started RetailerApplicationTests in 4.337 seconds (JVM running for 5.102)
+2023-12-19 09:52:34.223 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : HTTP POST http://localhost:63814/placeOrder
+2023-12-19 09:52:34.384 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-12-19 09:52:34.388 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Writing [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])] with org.springframework.http.converter.json.KotlinSerializationJsonHttpMessageConverter
+2023-12-19 09:52:34.447  INFO 23952 --- [http-nio-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-19 09:52:34.447  INFO 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-19 09:52:34.447 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-12-19 09:52:34.447 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-12-19 09:52:34.447 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-12-19 09:52:34.448 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@690ed13a
+2023-12-19 09:52:34.448 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@62054faf
+2023-12-19 09:52:34.449 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-12-19 09:52:34.449  INFO 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-19 09:52:34.455 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/placeOrder", parameters={}
+2023-12-19 09:52:34.459 DEBUG 23952 --- [http-nio-auto-1-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#placeOrder(Order)
+2023-12-19 09:52:34.477 DEBUG 23952 --- [http-nio-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample ite (truncated)...]
+2023-12-19 09:52:34.589  INFO 23952 --- [http-nio-auto-1-exec-1] e.r.a.DistributorPublisherImpl$Companion : Send message Order(id=402880868c80d8f9018c80d901510000, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])
+2023-12-19 09:52:34.600 DEBUG 23952 --- [http-nio-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json, application/json, application/*+json]
+2023-12-19 09:52:34.600 DEBUG 23952 --- [http-nio-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=SENT, signature=09df53b6-544a-4827-a676-a (truncated)...]
+2023-12-19 09:52:34.605 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-12-19 09:52:34.606 DEBUG 23952 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-19 09:52:34.606 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-12-19 09:52:34.611 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:63814/view/402880868c80d8f9018c80d901510000
+2023-12-19 09:52:34.611 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-12-19 09:52:34.612 DEBUG 23952 --- [http-nio-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/view/402880868c80d8f9018c80d901510000", parameters={}
+2023-12-19 09:52:34.613 DEBUG 23952 --- [http-nio-auto-1-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-12-19 09:52:34.627 DEBUG 23952 --- [http-nio-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json, application/json, application/*+json]
+2023-12-19 09:52:34.627 DEBUG 23952 --- [http-nio-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=SENT, signature=09df53b6-544a-4827-a676-a (truncated)...]
+2023-12-19 09:52:34.627 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-12-19 09:52:34.627 DEBUG 23952 --- [http-nio-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-19 09:52:34.628 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-12-19 09:52:34.643  INFO 23952 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.e.r.a.RetailerConsumerImpl$Companion   : Received message OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=CREATED, signature=815d6e386f3698f661c6737ba0ff4008)
+2023-12-19 09:52:34.931 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:63814/view/402880868c80d8f9018c80d901510000
+2023-12-19 09:52:34.933 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-12-19 09:52:34.938 DEBUG 23952 --- [http-nio-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/view/402880868c80d8f9018c80d901510000", parameters={}
+2023-12-19 09:52:34.938 DEBUG 23952 --- [http-nio-auto-1-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-12-19 09:52:34.942 DEBUG 23952 --- [http-nio-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json, application/json, application/*+json]
+2023-12-19 09:52:34.942 DEBUG 23952 --- [http-nio-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=CREATED, signature=815d6e386f3698f661c673 (truncated)...]
+2023-12-19 09:52:34.943 DEBUG 23952 --- [http-nio-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-19 09:52:34.943 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-12-19 09:52:34.943 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-12-19 09:52:34.944 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:63814/view/402880868c80d8f9018c80d901510000
+2023-12-19 09:52:34.944 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-12-19 09:52:34.945 DEBUG 23952 --- [http-nio-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/view/402880868c80d8f9018c80d901510000", parameters={}
+2023-12-19 09:52:34.945 DEBUG 23952 --- [http-nio-auto-1-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-12-19 09:52:34.949 DEBUG 23952 --- [http-nio-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json, application/json, application/*+json]
+2023-12-19 09:52:34.949 DEBUG 23952 --- [http-nio-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=CREATED, signature=815d6e386f3698f661c673 (truncated)...]
+2023-12-19 09:52:34.950 DEBUG 23952 --- [http-nio-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-19 09:52:34.950 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-12-19 09:52:34.951 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-12-19 09:52:35.135  INFO 23952 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.e.r.a.RetailerConsumerImpl$Companion   : Received message OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=DELIVERED, signature=815d6e386f3698f661c6737ba0ff4008)
+2023-12-19 09:52:35.259 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:63814/view/402880868c80d8f9018c80d901510000
+2023-12-19 09:52:35.259 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2023-12-19 09:52:35.260 DEBUG 23952 --- [http-nio-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/view/402880868c80d8f9018c80d901510000", parameters={}
+2023-12-19 09:52:35.261 DEBUG 23952 --- [http-nio-auto-1-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+2023-12-19 09:52:35.263 DEBUG 23952 --- [http-nio-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json, application/json, application/*+json]
+2023-12-19 09:52:35.263 DEBUG 23952 --- [http-nio-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=402880868c80d8f9018c80d901510000, status=DELIVERED, signature=815d6e386f3698f661c6 (truncated)...]
+2023-12-19 09:52:35.264 DEBUG 23952 --- [http-nio-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-19 09:52:35.264 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Response 200 OK
+2023-12-19 09:52:35.264 DEBUG 23952 --- [main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2023-12-19 09:52:35.280  INFO 23952 --- [SpringApplicationShutdownHook] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2023-12-19 09:52:36.151  INFO 23952 --- [SpringApplicationShutdownHook] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2023-12-19 09:52:36.331  INFO 23952 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-19 09:52:36.333  INFO 23952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-19 09:52:36.336  INFO 23952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
