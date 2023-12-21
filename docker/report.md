@@ -50,5 +50,65 @@ PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> docker logs goofy_sutherland
 
 * ``` docker stop goofy_sutherland ```
 
-### Kubernetes 
+### Kubernetes
 
+````bash
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl create -f .\deployment-definition.yml          
+deployment.apps/my-app-deployment created
+service/my-app-service created
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get pod                              
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-app-deployment-5d99486987-hkg8j   1/1     Running   0          3s
+my-app-deployment-5d99486987-phwlh   1/1     Running   0          3s
+my-app-deployment-5d99486987-xp57z   1/1     Running   0          3s
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get all                              
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/my-app-deployment-5d99486987-hkg8j   1/1     Running   0          7s
+pod/my-app-deployment-5d99486987-phwlh   1/1     Running   0          7s
+pod/my-app-deployment-5d99486987-xp57z   1/1     Running   0          7s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP    113m
+service/my-app-service   ClusterIP   10.99.194.46   <none>        8080/TCP   7s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-app-deployment   3/3     3            3           7s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-app-deployment-5d99486987   3         3         3       7s
+````
+
+````bash
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl scale deployment my-app-deployment --replicas=2
+deployment.apps/my-app-deployment scaled
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get pod                                        
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-app-deployment-5d99486987-phwlh   1/1     Running   0          31s
+my-app-deployment-5d99486987-xp57z   1/1     Running   0          31s
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get all                                        
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/my-app-deployment-5d99486987-phwlh   1/1     Running   0          35s
+pod/my-app-deployment-5d99486987-xp57z   1/1     Running   0          35s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP    114m
+service/my-app-service   ClusterIP   10.99.194.46   <none>        8080/TCP   35s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-app-deployment   2/2     2            2           35s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-app-deployment-5d99486987   2         2         2       35s
+````
+
+````bash
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl delete deployment my-app-deployment            
+deployment.apps "my-app-deployment" deleted
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl delete services my-app-service                 
+service "my-app-service" deleted
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get all                            
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   114m
+PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get pod                                        
+No resources found in default namespace.>
+````
