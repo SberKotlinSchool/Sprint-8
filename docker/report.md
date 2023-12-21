@@ -50,47 +50,5 @@ PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> docker logs goofy_sutherland
 
 * ``` docker stop goofy_sutherland ```
 
-### Kubernetes
-
-````bash
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl create -f .\deployment-definition.yml
-deployment.apps/my-app-deployment created
-service/my-app-service created
-
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get pod                                    
-NAME                                 READY   STATUS    RESTARTS   AGE
-my-app-deployment-5d99486987-9jwv6   1/1     Running   0          14s
-my-app-deployment-5d99486987-m2p4f   1/1     Running   0          14s
-my-app-deployment-5d99486987-zkfrt   1/1     Running   0          14s
-
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get all                                                 
-NAME                                     READY   STATUS    RESTARTS   AGE
-pod/my-app-deployment-5d99486987-9jwv6   1/1     Running   0          36s
-pod/my-app-deployment-5d99486987-m2p4f   1/1     Running   0          36s
-pod/my-app-deployment-5d99486987-zkfrt   1/1     Running   0          36s
-
-NAME                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP    103m
-service/my-app-service   ClusterIP   10.99.131.221   <none>        8080/TCP   36s
-
-NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/my-app-deployment   3/3     3            3           36s
-
-NAME                                           DESIRED   CURRENT   READY   AGE
-replicaset.apps/my-app-deployment-5d99486987   3         3         3       36s
-````
-
-````bash
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl delete services my-app-service       
-service "my-app-service" deleted
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl delete deployment my-app-deployment  
-deployment.apps "my-app-deployment" deleted
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get all                            
-NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   105m
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker> kubectl get pod                              
-No resources found in default namespace.
-PS C:\Users\Ctac\IdeaProjects\Sprint-8\docker>
-````
-
+### Kubernetes 
 
