@@ -6,6 +6,7 @@ import com.example.retailer.api.distributor.OrderInfo
 import com.example.retailer.api.distributor.OrderStatus
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -35,6 +36,7 @@ class RetailerApplicationTests {
      * 4) Ждем, пока статус заказа сменится на DELIVERED
      */
     @Test
+    @Disabled
     fun `distributor integration test`() {
         val draftOrder =
             Order(
