@@ -1,0 +1,46 @@
+1) Сборка docker-image
+cab-wsm-0466201:docker 18529876$ docker build --tag 'sberschool-kotlin-docker-example' .
+[+] Building 82.7s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 1.11kB                                                                                                                                                                      0.0s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8-jdk-alpine                                                                                                                                     1.4s
+ => [internal] load metadata for docker.io/library/maven:3.6.2-jdk-11                                                                                                                                       1.4s
+ => [builder 1/4] FROM docker.io/library/maven:3.6.2-jdk-11@sha256:df039b1399b44d530bbe35f7cea963be9f7fffab231a0d225784fc98d9eb1a8b                                                                         0.0s
+ => CACHED [stage-1 1/2] FROM docker.io/library/openjdk:8-jdk-alpine@sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3                                                                0.0s
+ => [internal] load build context                                                                                                                                                                           0.0s
+ => => transferring context: 9.66kB                                                                                                                                                                         0.0s
+ => CACHED [builder 2/4] WORKDIR /tmp/                                                                                                                                                                      0.0s
+ => [builder 3/4] COPY . .                                                                                                                                                                                  0.1s
+ => [builder 4/4] RUN mvn clean install                                                                                                                                                                    80.6s
+ => [stage-1 2/2] COPY --from=Builder /tmp/target/docker-0.0.1-SNAPSHOT.jar /tmp/docker.jar                                                                                                                 0.2s
+ => exporting to image                                                                                                                                                                                      0.1s
+ => => exporting layers                                                                                                                                                                                     0.1s
+ => => writing image sha256:ef78bc18da8d24429ad02ac70808cf18a0ab699db57df3a7cdedc9b553db303f                                                                                                                0.0s
+ => => naming to docker.io/library/sberschool-kotlin-docker-example                                                                                                                                         0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+
+2) Создание и запуск docker-контейнера с параметром 'qa'
+cab-wsm-0466201:docker 18529876$ docker run --detach --rm --publish 8080:8080 --name 'sberschool-kotlin-docker-example-container' --env SPRING_ACTIVE_PROFILE=qa 'sberschool-kotlin-docker-example'
+d096a3e939868ccf478fa68925ce3a9924297188a166fb208bf667a476725080
+
+3) Проверка запущенного приложения
+cab-wsm-0466201:docker 18529876$ curl localhost:8080/hello
+QA!
+
+4) Остановка контейнера по имени. Контейнер после отсановки автоматически удаляется
+cab-wsm-0466201:docker 18529876$ docker stop 'sberschool-kotlin-docker-example-container'
+sberschool-kotlin-docker-example-container
+
+5) Создание и запуск docker-контейнера с параметром 'prod'
+cab-wsm-0466201:docker 18529876$ docker run --detach --rm --publish 8080:8080 --name 'sberschool-kotlin-docker-example-container' --env SPRING_ACTIVE_PROFILE=prod 'sberschool-kotlin-docker-example'
+e0e36569536a9a08975392a629045f922bf2bba7302e2faba9cfa829bb65c182
+
+6) Проверка запущенного приложения
+cab-wsm-0466201:docker 18529876$ curl localhost:8080/hello
+PRODUCTION!
+
+
