@@ -8,7 +8,7 @@ data class OrderInfo(
     /**
      * Уникальный идентификатор заказа
      *
-     * @see com.example.retailer.api.distributor.Item#id
+     * @see com.example.retailer.api.distributor.Order#id
      */
     val orderId: String,
 
