@@ -1,1 +1,40 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+    type: back-end
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: my-app
+        type: back-end
+    spec:
+      containers:
+        - name: sprint8-container
+          image: sprint8
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+  selector:
+    matchLabels:
+      type: back-end
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  labels:
+    app: my-app
+spec:
+  selector:
+    type: back-end
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
