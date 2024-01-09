@@ -1,8 +1,12 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
+
 /**
  * Уведомление об изменении заказа
  */
+@Entity
 data class OrderInfo(
 
     /**
@@ -10,6 +14,7 @@ data class OrderInfo(
      *
      * @see com.example.retailer.api.distributor.Item#id
      */
+    @Id
     val orderId: String,
 
     /**
@@ -17,6 +22,7 @@ data class OrderInfo(
      *  Created
      *
      */
+    @Enumerated(EnumType.STRING)
     var status: OrderStatus,
 
     /**
