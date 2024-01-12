@@ -19,6 +19,7 @@ data class Location(
     @JsonProperty("pokemon_encounters")
     val pokemonEncounters: List<PokemonEncounter>? = null
 )
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class EncounterMethodRate(
 )
