@@ -15,13 +15,19 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class SlowlyApiTest {
-    val client = HystrixFeign.builder()
+    lateinit var mockServer: ClientAndServer
+
+    private val failClient: SlowlyApi = HystrixFeign.builder()
         .client(ApacheHttpClient())
         .decoder(JacksonDecoder())
-        // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
-    lateinit var mockServer: ClientAndServer
+
+    private val client: SlowlyApi = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        .options(Request.Options(10, TimeUnit.SECONDS, 10, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co/api/v2/", FallbackSlowlyApi())
 
     @BeforeEach
     fun setup() {
@@ -51,6 +57,12 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals("error", failClient.getPokemon("test").name)
     }
+
+    @Test
+    fun `getMetapod() should return metapod`() {
+        assertEquals("metapod", client.getPokemon("metapod").name)
+    }
+
 }
