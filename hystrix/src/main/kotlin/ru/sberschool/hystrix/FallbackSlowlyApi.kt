@@ -1,7 +1,9 @@
 package ru.sberschool.hystrix
 
+import feign.Param
+
 class FallbackSlowlyApi : SlowlyApi {
-    override fun getSomething() = SimpleResponse("predefined data")
+    override fun getPokemon(name: String): Pokemon = Pokemon(-1, "error")
 }
 
 
