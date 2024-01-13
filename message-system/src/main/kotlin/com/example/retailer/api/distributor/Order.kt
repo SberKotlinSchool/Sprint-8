@@ -31,5 +31,6 @@ data class Order(
      * Список заказанных товаров
      */
     @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "order_id")
     val items: List<Item>
 )

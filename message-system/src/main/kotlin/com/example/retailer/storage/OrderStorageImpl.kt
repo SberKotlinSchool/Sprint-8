@@ -12,10 +12,6 @@ class OrderStorageImpl(
     private val orderRepository: OrderRepository,
     private val orderInfoRepository: OrderInfoRepository
 ) : OrderStorage {
-    /**
-     * Первичное сохранение заявки в БД
-     * Нужно вернуть объект с заполненным id
-     */
     override fun createOrder(draftOrder: Order): PlaceOrderData {
         val order = orderRepository.save(draftOrder)
         val info = orderInfoRepository.save(OrderInfo(order.id!!.toString(), OrderStatus.SENT, ""))
