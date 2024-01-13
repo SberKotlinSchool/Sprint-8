@@ -1,6 +1,7 @@
 package com.example.retailer.adapter
 
 import com.example.retailer.api.distributor.Order
+import mu.KotlinLogging
 import org.springframework.amqp.core.TopicExchange
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
@@ -28,5 +29,9 @@ class DistributorPublisherImpl(
             return false
         }
         return true
+    }
+
+    companion object {
+        val log = KotlinLogging.logger {}
     }
 }
