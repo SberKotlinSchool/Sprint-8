@@ -1,1 +1,33 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-deployment
+  template:
+    metadata:
+      labels:
+        app: spring-deployment
+    spec:
+      containers:
+        - name: spring-deployment
+          image: spring-deployment
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-deployment
+spec:
+  type: NodePort
+  selector:
+    app: spring-deployment
+  ports:
+    - targetPort: 8080
+      port: 8080
+      nodePort: 30000
