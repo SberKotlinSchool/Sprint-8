@@ -1,0 +1,43 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: retailer
+    password: retailer
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+
+exchange:
+  name: distributor_exchange
+retailer:
+  routing:
+    key: retailer.gagarinit.#
+  queue: queue.retailer
+distributor:
+  routing:
+    key: distributor.placeOrder.gagarinit.%%
+header:
+  exchange:
+    name: Notify-Exchange
+  routing:
+    key:
+      name: Notify-RoutingKey
+      value: retailer.gagarinit
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
