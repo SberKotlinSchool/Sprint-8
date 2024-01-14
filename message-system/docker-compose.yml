@@ -2,6 +2,9 @@ services:
   rabbitmq:
     image: rabbitmq:3.9-management
     container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
     ports:
       - 5672:5672
       - 15672:15672
@@ -10,3 +13,17 @@ services:
     image: shariktlt/sber_kotlin_school_2021_messaging_distributor:1.0.0-SNAPSHOT
     depends_on:
       - rabbitmq
+  postgres:
+    image: postgres:12.6
+    environment:
+      POSTGRES_DB: order
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: "/data/postgres"
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres:
