@@ -1,5 +1,16 @@
 package com.example.retailer.api.distributor
 
+import java.util.*
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.PrePersist
+import javax.persistence.Table
+
+
+@Entity
+@Table(name = "orders")
 /**
  * Описание заказа
  */
@@ -7,7 +18,8 @@ data class Order(
     /**
      * Уникальный идентификатор заказа на стороне ретейлера
      */
-    val id: String?,
+    @Id
+    var id: String?,
 
     /**
      * Произвольный адрес доставки
@@ -22,5 +34,12 @@ data class Order(
     /**
      * Список заказанных товаров
      */
+    @OneToMany(cascade = [CascadeType.ALL])
     val items: List<Item>
-)
+) {
+
+    @PrePersist
+    private fun ensureId() {
+        id = UUID.randomUUID().toString()
+    }
+}
