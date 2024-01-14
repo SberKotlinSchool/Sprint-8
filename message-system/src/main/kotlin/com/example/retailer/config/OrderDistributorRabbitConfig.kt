@@ -29,20 +29,20 @@ class OrderDistributorRabbitConfig(
     @Bean
     fun distributionRabbitAdmin(orderConnectionFactory: ConnectionFactory) = RabbitAdmin(orderConnectionFactory)
 
-    @Bean
-    fun orderRabbitQueue(): Queue = Queue("retailer_queue", false)
+//    @Bean
+//    fun orderRabbitQueue(): Queue = Queue("retailer_queue", false)
 
-    @Bean
-    fun topicRabbitExchange(): TopicExchange = TopicExchange("distributor_exchange")
+//    @Bean
+//    fun topicRabbitExchange(): TopicExchange = TopicExchange("distributor_exchange")
 
-    @Bean
-    fun rabbitBinding(
-        orderRabbitQueue: Queue,
-        topicRabbitExchange: TopicExchange
-    ): Binding = BindingBuilder
-        .bind(orderRabbitQueue)
-        .to(topicRabbitExchange)
-        .with("retailer.AntonyKon.#")
+//    @Bean
+//    fun rabbitBinding(
+//        orderRabbitQueue: Queue,
+//        topicRabbitExchange: TopicExchange
+//    ): Binding = BindingBuilder
+//        .bind(orderRabbitQueue)
+//        .to(topicRabbitExchange)
+//        .with("retailer.AntonyKon.#")
 
     @Bean
     fun orderRabbitTemplate(
@@ -63,7 +63,7 @@ class OrderDistributorRabbitConfig(
 class OrderMessagePostProcessor : MessagePostProcessor {
     override fun postProcessMessage(message: Message): Message = message.apply {
         messageProperties.setHeader("Notify-Exchange", "distributor_exchange")
-        messageProperties.setHeader("Notify-RoutingKey", "retailer.AntonyKon")
+        messageProperties.setHeader("Notify-RoutingKey", "retail.AntonyKon")
     }.also {
         println(message)
     }
