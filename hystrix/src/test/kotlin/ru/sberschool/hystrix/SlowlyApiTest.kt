@@ -21,6 +21,14 @@ class SlowlyApiTest {
         // для удобства тестирования задаем таймауты на 1 секунду
         .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
         .target(SlowlyApi::class.java, "http://127.0.0.1:18080", FallbackSlowlyApi())
+
+    val clientPokemon = HystrixFeign.builder()
+        .client(ApacheHttpClient())
+        .decoder(JacksonDecoder())
+        // для удобства тестирования задаем таймауты на 1 секунду
+        .options(Request.Options(1, TimeUnit.SECONDS, 1, TimeUnit.SECONDS, true))
+        .target(SlowlyApi::class.java, "https://pokeapi.co", FallbackSlowlyApi())
+
     lateinit var mockServer: ClientAndServer
 
     @BeforeEach
@@ -42,7 +50,7 @@ class SlowlyApiTest {
                 // задаем матчер для нашего запроса
                 HttpRequest.request()
                     .withMethod("GET")
-                    .withPath("/")
+                    .withPath("/api/v2/pokemon/pikachu")
             )
             .respond(
                 // наш запрос попадает на таймаут
@@ -51,6 +59,13 @@ class SlowlyApiTest {
                     .withDelay(TimeUnit.SECONDS, 30) //
             )
         // expect
-        assertEquals("predefined data", client.getSomething().data)
+        assertEquals(-1, client.getSomething("pikachu").id)
+    }
+
+    @Test
+    fun `get pokemon pikahcu`(){
+        val pokemon = SimpleResponse(25,"pikachu")
+        // expect
+        assertEquals(pokemon, clientPokemon.getSomething("pikachu"))
     }
 }
