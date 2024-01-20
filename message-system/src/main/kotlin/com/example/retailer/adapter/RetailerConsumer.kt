@@ -1,5 +1,7 @@
 package com.example.retailer.adapter
 
-interface DistributorConsumer {
-    fun 
+import com.example.retailer.api.distributor.OrderInfo
+
+interface RetailerConsumer {
+    fun getOrderUpdate(orderInfo: OrderInfo)
 }

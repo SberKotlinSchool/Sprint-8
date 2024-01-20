@@ -1,1 +1,120 @@
-Разместите в этом файле лог успешного теста
+2024-01-14 22:03:58.068  INFO 812 --- [           main] c.e.retailer.RetailerApplicationTests    : Starting RetailerApplicationTests using Java 1.8.0_301 on Computer with PID 812 (started by User in C:\Users\User\IdeaProjects\Sprint-8\message-system)
+2024-01-14 22:03:58.071  INFO 812 --- [           main] c.e.retailer.RetailerApplicationTests    : No active profile set, falling back to default profiles: default
+2024-01-14 22:03:58.760  INFO 812 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-01-14 22:03:58.805  INFO 812 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 2 JPA repository interfaces.
+2024-01-14 22:03:59.534  INFO 812 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2024-01-14 22:03:59.544  INFO 812 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-14 22:03:59.544  INFO 812 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-01-14 22:03:59.643  INFO 812 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-14 22:03:59.643  INFO 812 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1552 ms
+2024-01-14 22:03:59.694  INFO 812 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-01-14 22:03:59.937  INFO 812 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-01-14 22:03:59.944  INFO 812 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:retailer'
+2024-01-14 22:04:00.182  INFO 812 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-01-14 22:04:00.231  INFO 812 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2024-01-14 22:04:00.350  INFO 812 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-01-14 22:04:00.455  INFO 812 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-01-14 22:04:00.632  WARN 812 --- [           main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+Hibernate: drop table if exists item CASCADE 
+Hibernate: drop table if exists order_info CASCADE 
+Hibernate: drop table if exists orders CASCADE 
+Hibernate: drop table if exists orders_items CASCADE 
+Hibernate: create table item (id bigint not null, name varchar(255), primary key (id))
+Hibernate: create table order_info (order_id varchar(255) not null, signature varchar(255), status varchar(255), primary key (order_id))
+Hibernate: create table orders (id varchar(255) not null, address varchar(255), recipient varchar(255), primary key (id))
+Hibernate: create table orders_items (order_id varchar(255) not null, items_id bigint not null)
+Hibernate: alter table orders_items add constraint UK_7qrg5pfgjon82yhgwfqrdijm5 unique (items_id)
+Hibernate: alter table orders_items add constraint FKpend8sfg922gwhn2d3n457khv foreign key (items_id) references item
+Hibernate: alter table orders_items add constraint FKij1wwgx6o198ubsx1oulpopem foreign key (order_id) references orders
+2024-01-14 22:04:00.984  INFO 812 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-01-14 22:04:00.993  INFO 812 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-01-14 22:04:01.897  WARN 812 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-01-14 22:04:02.140 DEBUG 812 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-01-14 22:04:02.237 DEBUG 812 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 4 mappings in 'requestMappingHandlerMapping'
+2024-01-14 22:04:02.301 DEBUG 812 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-01-14 22:04:02.318 DEBUG 812 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-01-14 22:04:02.616  INFO 812 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 61147 (http) with context path ''
+2024-01-14 22:04:02.618  INFO 812 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2024-01-14 22:04:02.681  INFO 812 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#7893c715:0/SimpleConnection@56b751b1 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 61150]
+2024-01-14 22:04:02.687  INFO 812 --- [           main] o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-delete, or exclusive Queue (retailer_queue) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost.
+2024-01-14 22:04:02.752  INFO 812 --- [           main] c.e.retailer.RetailerApplicationTests    : Started RetailerApplicationTests in 4.961 seconds (JVM running for 5.828)
+2024-01-14 22:04:02.866 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : HTTP POST http://localhost:61147/placeOrder
+2024-01-14 22:04:03.051 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2024-01-14 22:04:03.067 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Writing [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample item), Item(id=2, name=Another item)])] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+2024-01-14 22:04:03.131  INFO 812 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-14 22:04:03.132  INFO 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-14 22:04:03.132 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-01-14 22:04:03.132 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-01-14 22:04:03.132 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-01-14 22:04:03.133 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@43fe2008
+2024-01-14 22:04:03.133 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@436a563f
+2024-01-14 22:04:03.133 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-01-14 22:04:03.133  INFO 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-01-14 22:04:03.140 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/placeOrder", parameters={}
+2024-01-14 22:04:03.142 DEBUG 812 --- [o-auto-1-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#placeOrder(Order)
+2024-01-14 22:04:03.166 DEBUG 812 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [Order(id=null, address=sample address, recipient=sample recipient, items=[Item(id=1, name=Sample ite (truncated)...]
+Hibernate: insert into orders (address, recipient, id) values (?, ?, ?)
+Hibernate: insert into item (name, id) values (?, ?)
+Hibernate: insert into item (name, id) values (?, ?)
+Hibernate: insert into orders_items (order_id, items_id) values (?, ?)
+Hibernate: insert into orders_items (order_id, items_id) values (?, ?)
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+Hibernate: insert into order_info (signature, status, order_id) values (?, ?, ?)
+2024-01-14 22:04:03.271 DEBUG 812 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-01-14 22:04:03.272 DEBUG 812 --- [o-auto-1-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=9ad9f4bd8c97a7b8018c97a7c2b90000, status=SENT, signature=)]
+2024-01-14 22:04:03.278 DEBUG 812 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-01-14 22:04:03.278 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2024-01-14 22:04:03.278 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2024-01-14 22:04:03.283 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:61147/view/9ad9f4bd8c97a7b8018c97a7c2b90000
+2024-01-14 22:04:03.283 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2024-01-14 22:04:03.286 DEBUG 812 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/view/9ad9f4bd8c97a7b8018c97a7c2b90000", parameters={}
+2024-01-14 22:04:03.286 DEBUG 812 --- [o-auto-1-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+2024-01-14 22:04:03.300 DEBUG 812 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-01-14 22:04:03.300 DEBUG 812 --- [o-auto-1-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=9ad9f4bd8c97a7b8018c97a7c2b90000, status=SENT, signature=)]
+2024-01-14 22:04:03.301 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2024-01-14 22:04:03.301 DEBUG 812 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-01-14 22:04:03.301 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+Hibernate: select count(*) as col_0_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+Hibernate: update order_info set signature=?, status=? where order_id=?
+2024-01-14 22:04:03.616 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:61147/view/9ad9f4bd8c97a7b8018c97a7c2b90000
+2024-01-14 22:04:03.616 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2024-01-14 22:04:03.617 DEBUG 812 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/view/9ad9f4bd8c97a7b8018c97a7c2b90000", parameters={}
+2024-01-14 22:04:03.617 DEBUG 812 --- [o-auto-1-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+2024-01-14 22:04:03.618 DEBUG 812 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-01-14 22:04:03.618 DEBUG 812 --- [o-auto-1-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=9ad9f4bd8c97a7b8018c97a7c2b90000, status=CREATED, signature=b01c6c0c048c5ce4620103 (truncated)...]
+2024-01-14 22:04:03.619 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2024-01-14 22:04:03.619 DEBUG 812 --- [o-auto-1-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-01-14 22:04:03.619 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2024-01-14 22:04:03.619 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:61147/view/9ad9f4bd8c97a7b8018c97a7c2b90000
+2024-01-14 22:04:03.619 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2024-01-14 22:04:03.620 DEBUG 812 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/view/9ad9f4bd8c97a7b8018c97a7c2b90000", parameters={}
+2024-01-14 22:04:03.620 DEBUG 812 --- [o-auto-1-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+2024-01-14 22:04:03.621 DEBUG 812 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-01-14 22:04:03.621 DEBUG 812 --- [o-auto-1-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=9ad9f4bd8c97a7b8018c97a7c2b90000, status=CREATED, signature=b01c6c0c048c5ce4620103 (truncated)...]
+2024-01-14 22:04:03.622 DEBUG 812 --- [o-auto-1-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-01-14 22:04:03.622 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2024-01-14 22:04:03.622 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+Hibernate: select count(*) as col_0_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+Hibernate: update order_info set signature=?, status=? where order_id=?
+2024-01-14 22:04:03.929 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : HTTP GET http://localhost:61147/view/9ad9f4bd8c97a7b8018c97a7c2b90000
+2024-01-14 22:04:03.929 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2024-01-14 22:04:03.930 DEBUG 812 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/view/9ad9f4bd8c97a7b8018c97a7c2b90000", parameters={}
+2024-01-14 22:04:03.930 DEBUG 812 --- [o-auto-1-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.retailer.endpoint.RetailEndpoint#viewOrder(String)
+Hibernate: select orderinfo0_.order_id as order_id1_1_0_, orderinfo0_.signature as signatur2_1_0_, orderinfo0_.status as status3_1_0_ from order_info orderinfo0_ where orderinfo0_.order_id=?
+2024-01-14 22:04:03.932 DEBUG 812 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, application/*+json] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-01-14 22:04:03.932 DEBUG 812 --- [o-auto-1-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [OrderInfo(orderId=9ad9f4bd8c97a7b8018c97a7c2b90000, status=DELIVERED, signature=b01c6c0c048c5ce46201 (truncated)...]
+2024-01-14 22:04:03.932 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2024-01-14 22:04:03.932 DEBUG 812 --- [o-auto-1-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-01-14 22:04:03.932 DEBUG 812 --- [           main] o.s.web.client.RestTemplate              : Reading to [com.example.retailer.api.distributor.OrderInfo]
+2024-01-14 22:04:03.948  INFO 812 --- [ionShutdownHook] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2024-01-14 22:04:04.788  INFO 812 --- [ionShutdownHook] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2024-01-14 22:04:04.969  INFO 812 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-01-14 22:04:04.971  INFO 812 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-01-14 22:04:04.972  INFO 812 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+Process finished with exit code 0
