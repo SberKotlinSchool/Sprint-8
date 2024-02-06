@@ -16,12 +16,4 @@ data class Order(
     @GeneratedValue(generator = "uuids")
     @GenericGenerator(name = "uuids", strategy = "uuid")
     val id: String?,
-
-/**
-@@ -22,5 +30,6 @@ data class Order(
-/**
- * Список заказанных товаров
-*/
-@OneToMany(cascade = [CascadeType.ALL])
-val items: List<Item>
 )
