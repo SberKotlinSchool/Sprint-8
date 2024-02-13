@@ -20,6 +20,7 @@ interface OrderStorage {
      */
     fun updateOrder(order: OrderInfo) : Boolean
 
+    fun getOrders(): List<OrderInfo>
     /**
      * Получение информации о заявке по id или null если не найдено
      */

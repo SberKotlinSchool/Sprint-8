@@ -1,12 +1,20 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
+
 /**
  * Описание заказа
  */
+@Entity
+@Table(name = "orders")
 data class Order(
     /**
      * Уникальный идентификатор заказа на стороне ретейлера
      */
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     val id: String?,
 
     /**
@@ -22,5 +30,7 @@ data class Order(
     /**
      * Список заказанных товаров
      */
-    val items: List<Item>
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    val items: List<Item> = mutableListOf()
 )
